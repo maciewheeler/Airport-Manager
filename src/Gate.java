@@ -20,25 +20,25 @@ public class Gate implements Serializable {
 
     public void getGateNumber() {
         Random rand = new Random();
-        this.gateNumber = rand.nextInt(18);
+        this.gateNumber = rand.nextInt(18) + 1;
     }
 
     public void getGateLetter() {
         Random rand = new Random();
         int gateLetter = rand.nextInt(3);
         switch (gateLetter) {
-            case 1:
+            case 0:
                 this.letter = "A";
                 break;
-            case 2:
+            case 1:
                 this.letter = "B";
                 break;
-            case 3:
+            case 2:
                 this.letter = "C";
                 break;
         }
     }
-    
+
     public String getGate(int gateNumber, String letter) {
         return this.letter + this.gateNumber;
     }
