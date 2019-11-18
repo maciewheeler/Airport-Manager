@@ -29,6 +29,3 @@ public class BoardingPass extends Passenger implements Airline {
         return boardingPass;
     }
 }
-
-//possibly have this extend passenger and gate????
-//and have implement airline???
