@@ -45,7 +45,7 @@ public class ReservationServer {
                 e.printStackTrace();
 
                 break;
-            } //end try catch
+            } 
 
             handler = new ClientHandler(clientSocket);
 
@@ -56,7 +56,7 @@ public class ReservationServer {
             System.out.printf("<Client %d connected...>%n", connectionCount);
 
             connectionCount++;
-        } //end while
+        }
     } //serveClients
 
     /**
@@ -88,7 +88,7 @@ public class ReservationServer {
             return Objects.equals(this.serverSocket, ((ReservationServer) object).serverSocket);
         } else {
             return false;
-        } //end if
+        } 
     } //equals
 
     /**
@@ -103,5 +103,4 @@ public class ReservationServer {
 
         return String.format(format, this.serverSocket);
     } //toString
-}
 }
