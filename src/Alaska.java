@@ -5,5 +5,7 @@
  * @version November 18, 2019
  */
 
-public class Alaska implements Airline {
-}
+ @Override
+    public String getName() {
+        return "Alaska";
+    }
