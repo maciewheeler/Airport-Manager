@@ -1,9 +1,8 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
+ * A class to create a gate.
  *
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
@@ -33,5 +32,4 @@ public class Gate implements Serializable {
         this.gateNumber = gateNumber;
         this.letter = letter;
     }
-
 }
