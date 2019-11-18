@@ -67,7 +67,7 @@ public class ClientHandler implements Runnable {
             return Objects.equals(this.clientSocket, ((ClientHandler) object).clientSocket);
         } else {
             return false;
-        } //end if
+        }
     } //equals
 
     /**
@@ -82,5 +82,4 @@ public class ClientHandler implements Runnable {
 
         return String.format(format, this.clientSocket);
     } //toString
-}
 }
