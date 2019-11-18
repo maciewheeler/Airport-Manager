@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ReservationRunner {
 
     /**
-     * Creates a {@code CountdownServer} instance, then begins to serve clients.
+     * Creates a CountdownServer instance, then begins to serve clients.
      *
      * @param args the command line arguments
      */
@@ -25,7 +25,7 @@ public class ReservationRunner {
             e.printStackTrace();
 
             return;
-        } //end try catch
+        } 
 
         server.serveClients();
     } //main
