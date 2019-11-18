@@ -17,5 +17,4 @@ public class Alaska implements Airline {
     public String getName() {
         return "Alaska";
     }
-
 }
