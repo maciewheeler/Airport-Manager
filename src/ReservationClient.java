@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 
@@ -31,7 +32,6 @@ public final class ReservationClient {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BufferedReader userInputReader = new BufferedReader(new InputStreamReader(System.in));
         String hostname;
         String portString;
         int port;
@@ -41,57 +41,53 @@ public final class ReservationClient {
         String request;
         String response;
 
-        try {
-            String host =  JOptionPane.showInputDialog(null,
-                "What is the hostname you'd like to connect to?", "Hostname?", JOptionPane.OK_CANCEL_OPTION);
 
-            hostname = userInputReader.readLine();
+        hostname =  JOptionPane.showInputDialog(null, "What is the hostname you'd" +
+                    " like to connect to?", "Hostname?", JOptionPane.QUESTION_MESSAGE);
 
-            if (hostname == null) {
-                System.out.println();
+        if (hostname == null) {
+            JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
+                    " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
 
-                System.out.println("Goodbye!");
+            return;
+        }
 
-                return;
-            } //end if
+        portString = JOptionPane.showInputDialog(null, "What is the port you'd" +
+                    " like to connect to?", "Port?", JOptionPane.QUESTION_MESSAGE);
 
-            System.out.println();
+        if (portString == null) {
+            JOptionPane.showMessageDialog(null, "Thank you for using the Purdue University" +
+                    " Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
 
-            System.out.print("Enter the server's port: ");
+            return;
+        }
 
-            portString = userInputReader.readLine();
+        while (!isParsable(portString)) {
+            JOptionPane.showMessageDialog(null, "Error: The specified port is invalid!",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+
+            portString = JOptionPane.showInputDialog(null, "What is the port you'd" +
+                    " like to connect to?", "Port?", JOptionPane.QUESTION_MESSAGE);
 
             if (portString == null) {
-                System.out.println();
-
-                System.out.println("Goodbye!");
-
-                return;
-            } else if (!isParsable(portString)) {
-                System.out.println();
-
-                System.out.println("Error: the specified port must be a non-negative integer!");
-
-                System.out.println();
-
-                System.out.println("Goodbye!");
+                JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
+                        " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
 
                 return;
-            } else {
-                port = Integer.parseInt(portString);
-            } //end if
+            }
+        }
 
+        port = Integer.parseInt(portString);
+
+        try {
             socket = new Socket(hostname, port);
 
             socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
             socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            System.out.println();
-
-            System.out.print("Enter your request: ");
-
-            request = userInputReader.readLine();
+            request = JOptionPane.showInputDialog(null, "Enter your request:",
+                    "ReservationClient", JOptionPane.QUESTION_MESSAGE);
 
             while (request != null) {
                 socketWriter.write(request);
@@ -102,44 +98,34 @@ public final class ReservationClient {
 
                 response = socketReader.readLine();
 
-                System.out.println();
+                JOptionPane.showMessageDialog(null,
+                        String.format("Response from the server: %s", response), "ReservationClient",
+                        JOptionPane.INFORMATION_MESSAGE);
 
-                System.out.printf("Response from the server: %s%n", response);
-
-                System.out.println();
-
-                System.out.print("Enter your request: ");
-
-                request = userInputReader.readLine();
-            } //end while
-
-            System.out.println();
-
-            System.out.println("Goodbye!");
+                request = JOptionPane.showInputDialog(null, "Enter your request:",
+                        "ReservationClient", JOptionPane.QUESTION_MESSAGE);
+            } 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
-                userInputReader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } //end try catch
-
             if (socketWriter != null) {
                 try {
                     socketWriter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } //end try catch
-            } //end if
+                }
+            } 
 
             if (socketReader != null) {
                 try {
                     socketReader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } //end try catch
-            } //end if
-        } //end try catch finally
+                }
+            } 
+        }
+
+        JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
+                " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
     } //main
 }
