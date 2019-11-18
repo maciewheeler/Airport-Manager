@@ -10,5 +10,4 @@ import java.io.Serializable;
 public interface Airline extends Serializable {
     
     String getName();
-    int passengerCounter();
 }
