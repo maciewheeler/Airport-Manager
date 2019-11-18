@@ -7,10 +7,10 @@ import java.io.Serializable;
  * @version November 18, 2019
  */
 
-public interface Airline extends Serializable {
-
-
+public interface Airline {
+    String getName();
 }
+
 
 
 
