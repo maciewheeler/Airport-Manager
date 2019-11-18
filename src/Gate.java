@@ -9,27 +9,33 @@ import java.util.Random;
  */
 
 public class Gate implements Serializable {
-    Random rand = new Random();
-    int gateNumber = rand.nextInt(18);
-
-    int gateLetter = rand.nextInt(3);
+    
+    int gateNumber;
     String letter;
-    public void convertLetter(int gateLetter) {
-        switch (gateLetter) {
-            case 1:
-                letter = "A";
-                break;
-            case 2:
-                letter = "B";
-                break;
-            case 3:
-                letter = "C";
-                break;
-        }
-    }
-
+    
     public Gate(int gateNumber, String letter) {
         this.gateNumber = gateNumber;
         this.letter = letter;
+    }
+    
+    public void getGateNumber() {
+        Random rand = new Random();
+        this.gateNumber = rand.nextInt(18);
+    }
+    
+    public void getGateLetter() {
+        Random rand = new Random();
+        int gateLetter = rand.nextInt(3);
+        switch (gateLetter) {
+            case 1:
+                this.letter = "A";
+                break;
+            case 2:
+                this.letter = "B";
+                break;
+            case 3:
+                this.letter = "C";
+                break;
+        }
     }
 }
