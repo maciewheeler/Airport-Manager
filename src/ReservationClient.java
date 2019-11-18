@@ -42,7 +42,8 @@ public final class ReservationClient {
         String response;
 
         try {
-            System.out.print("Enter the server's hostname: ");
+            String host =  JOptionPane.showInputDialog(null,
+                "What is the hostname you'd like to connect to?", "Hostname?", JOptionPane.OK_CANCEL_OPTION);
 
             hostname = userInputReader.readLine();
 
