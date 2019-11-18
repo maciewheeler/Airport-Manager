@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import java.util.Objects;
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
  */
-public class ReservationRequestHandler implements Runnable {
+public class ClientHandler implements Runnable {
     /**
      * The client socket of this request handler.
      */
@@ -22,7 +23,7 @@ public class ReservationRequestHandler implements Runnable {
      * @param clientSocket the client socket to be used in construction
      * @throws NullPointerException if the specified client socket is {@code null}
      */
-    public ReservationRequestHandler(Socket clientSocket) throws NullPointerException {
+    public ClientHandler(Socket clientSocket) throws NullPointerException {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
 
         this.clientSocket = clientSocket;
@@ -62,8 +63,8 @@ public class ReservationRequestHandler implements Runnable {
     public boolean equals(Object object) {
         if (this == object) {
             return true;
-        } else if (object instanceof ReservationRequestHandler) {
-            return Objects.equals(this.clientSocket, ((ReservationRequestHandler) object).clientSocket);
+        } else if (object instanceof ClientHandler) {
+            return Objects.equals(this.clientSocket, ((ClientHandler) object).clientSocket);
         } else {
             return false;
         } //end if
