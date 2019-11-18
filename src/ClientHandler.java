@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.util.Objects;
@@ -34,7 +33,45 @@ public class ClientHandler implements Runnable {
      */
     @Override
     public void run() {
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        String line;
 
+        try {
+            reader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
+
+            writer = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
+
+            line = reader.readLine();
+
+            while (line != null) {
+                writer.write(line);
+
+                writer.newLine();
+
+                writer.flush();
+
+                line = reader.readLine();
+            } //end while
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } //end try catch
+            } //end if
+
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } //end try catch
+            } //end if
+        } //end try catch finally
     } //run
 
     /**
@@ -83,3 +120,6 @@ public class ClientHandler implements Runnable {
         return String.format(format, this.clientSocket);
     } //toString
 }
+
+//edit run method, i think that the actual stuff needs to go inside the client or the runner possibly??, i think the
+//run here just needs to be edited from the code i input and we need to add the weird stuff about that text file
