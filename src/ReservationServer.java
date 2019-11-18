@@ -32,7 +32,7 @@ public class ReservationServer {
      */
     public void serveClients() {
         Socket clientSocket;
-        ReservationRequestHandler handler;
+        ClientHandler handler;
         Thread handlerThread;
         int connectionCount = 0;
 
@@ -47,7 +47,7 @@ public class ReservationServer {
                 break;
             } //end try catch
 
-            handler = new ReservationRequestHandler(clientSocket);
+            handler = new ClientHandler(clientSocket);
 
             handlerThread = new Thread(handler);
 
