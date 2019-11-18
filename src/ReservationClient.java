@@ -41,6 +41,11 @@ public final class ReservationClient {
         String request;
         String response;
 
+        try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         hostname =  JOptionPane.showInputDialog(null, "What is the hostname you'd" +
                     " like to connect to?", "Hostname?", JOptionPane.QUESTION_MESSAGE);
@@ -104,7 +109,7 @@ public final class ReservationClient {
 
                 request = JOptionPane.showInputDialog(null, "Enter your request:",
                         "ReservationClient", JOptionPane.QUESTION_MESSAGE);
-            } 
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -114,7 +119,7 @@ public final class ReservationClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } 
+            }
 
             if (socketReader != null) {
                 try {
@@ -122,10 +127,15 @@ public final class ReservationClient {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } 
+            }
         }
 
         JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
                 " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
     } //main
+
+
+}
+class ResponseListener {
+
 }
