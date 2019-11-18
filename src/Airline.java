@@ -8,6 +8,6 @@ import java.io.Serializable;
  */
 
 public interface Airline extends Serializable {
-    
+   final int passengerMax = 100;
     String getName();
 }
