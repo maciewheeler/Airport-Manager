@@ -9,20 +9,20 @@ import java.util.Random;
  */
 
 public class Gate implements Serializable {
-    
+
     int gateNumber;
     String letter;
-    
+
     public Gate(int gateNumber, String letter) {
         this.gateNumber = gateNumber;
         this.letter = letter;
     }
-    
+
     public void getGateNumber() {
         Random rand = new Random();
         this.gateNumber = rand.nextInt(18);
     }
-    
+
     public void getGateLetter() {
         Random rand = new Random();
         int gateLetter = rand.nextInt(3);
@@ -37,5 +37,9 @@ public class Gate implements Serializable {
                 this.letter = "C";
                 break;
         }
+    }
+    
+    public String getGate(int gateNumber, String letter) {
+        return this.letter + this.gateNumber;
     }
 }
