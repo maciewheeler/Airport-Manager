@@ -1,5 +1,3 @@
- */
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,7 +7,7 @@ import java.util.Random;
  *
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
-
+ */
 
 public class Gate implements Serializable {
     Random rand = new Random();
