@@ -1,10 +1,12 @@
 /**
- *
+ * A class for the Southwest airline.
  *
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
  */
+
 public class Southwest implements Airline {
+
     public String getName() {
         return "Southwest";
     }
