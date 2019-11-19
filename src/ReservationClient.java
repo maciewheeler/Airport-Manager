@@ -88,9 +88,9 @@ public final class ReservationClient {
         try {
             socket = new Socket(hostname, port);
 
-            socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-
-            socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//            socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//
+//            socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 //            SwingUtilities.invokeLater(new Runnable() {
 //                @Override
@@ -99,13 +99,11 @@ public final class ReservationClient {
 //                }
 //            });
 
-            createFrame();
+        createFrame();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
-                " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
     } //main
 
     public static void createPanels() {
@@ -117,14 +115,18 @@ public final class ReservationClient {
 
         JPanel panel3 = new JPanel();
         panel3.setLayout(new BorderLayout());
-    }
+    } //createPanels
+
+    public static void createButtons() {
+        JButton button1 = new JButton();
+    } //createButtons
 
     public static void createFrame() {
         JFrame frame = new JFrame("Purdue University Flight Reservation System");
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
-    }
+    } //createFrame
 }
 class ResponseListener implements ActionListener {
 
