@@ -9,9 +9,9 @@ import java.io.Serializable;
 
 public class Passenger implements Serializable {
 
-    String firstName;
-    String lastName;
-    int age;
+    private String firstName;
+    private String lastName;
+    private int age;
 
     public Passenger(String fname, String lname, int age) {
         this.firstName = fname;
