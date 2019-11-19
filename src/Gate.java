@@ -10,8 +10,8 @@ import java.util.Random;
 
 public class Gate implements Serializable {
 
-    int gateNumber;
-    String terminal;
+    private int gateNumber;
+    private String terminal;
 
     public Gate() {
         this.gateNumber = getGateNumber();
