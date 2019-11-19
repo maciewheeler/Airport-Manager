@@ -10,6 +10,8 @@ import java.net.Socket;
  *
  * Used code from homework 11's CountdownClient as a base of our code.
  *
+ * Used https://stackoverflow.com/questions/22847148/java-text-formatting-bold for formatting text.
+ *
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
  */
@@ -89,10 +91,12 @@ public final class ReservationClient {
             @Override
             public void run() {
                 JFrame frame = new JFrame("Purdue University Flight Reservation System");
-                frame.setSize(500, 500);
+                frame.setSize(800, 800);
                 frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                 JPanel panel1 = new JPanel(new BorderLayout());
-                JTextArea openingText = new JTextArea("Welcome to the Purdue University Airline Reservation Management System!");
+                JTextField openingText = new JTextField("Welcome to the Purdue University Airline Reservation" +
+                        " Management System!");
+                openingText.setFont(new Font("Courier", Font.BOLD, 20));
                 panel1.add(openingText);
                 frame.add(panel1, BorderLayout.NORTH);
                 frame.setVisible(true);
