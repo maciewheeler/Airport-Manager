@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
 
@@ -38,8 +41,6 @@ public final class ReservationClient {
         Socket socket;
         BufferedWriter socketWriter = null;
         BufferedReader socketReader = null;
-        String request;
-        String response;
 
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -91,51 +92,43 @@ public final class ReservationClient {
 
             socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            request = JOptionPane.showInputDialog(null, "Enter your request:",
-                    "ReservationClient", JOptionPane.QUESTION_MESSAGE);
+//            SwingUtilities.invokeLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    createGUI();
+//                }
+//            });
 
-            while (request != null) {
-                socketWriter.write(request);
-
-                socketWriter.newLine();
-
-                socketWriter.flush();
-
-                response = socketReader.readLine();
-
-                JOptionPane.showMessageDialog(null,
-                        String.format("Response from the server: %s", response), "ReservationClient",
-                        JOptionPane.INFORMATION_MESSAGE);
-
-                request = JOptionPane.showInputDialog(null, "Enter your request:",
-                        "ReservationClient", JOptionPane.QUESTION_MESSAGE);
-            }
+            createFrame();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (socketWriter != null) {
-                try {
-                    socketWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (socketReader != null) {
-                try {
-                    socketReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
         JOptionPane.showMessageDialog(null, "Thank you for using the Purdue" +
                 " University Airline Management System!", "Thank You!", JOptionPane.PLAIN_MESSAGE);
     } //main
 
+    public static void createPanels() {
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BorderLayout());
 
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BorderLayout());
+
+        JPanel panel3 = new JPanel();
+        panel3.setLayout(new BorderLayout());
+    }
+
+    public static void createFrame() {
+        JFrame frame = new JFrame("Purdue University Flight Reservation System");
+        frame.setSize(500, 500);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+    }
 }
-class ResponseListener {
+class ResponseListener implements ActionListener {
 
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
