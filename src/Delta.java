@@ -8,6 +8,7 @@
 public class Delta implements Airline {
    private boolean full = false; //true when flight is full
     private Gate gate;
+   ArrayList<Passenger> passengers = new ArrayList<>();
     private int passengerCounter = passengers.size();
     final int flightNumber = 18000;
     public void statusChanger() {
