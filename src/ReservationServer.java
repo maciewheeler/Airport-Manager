@@ -33,10 +33,11 @@ public final class ReservationServer {
      * Serves the clients that connect to this server.
      */
     public void serveClients() {
+        int port = this.serverSocket.getLocalPort();
         Socket clientSocket;
         ClientHandler handler;
         Thread handlerThread;
-        int connectionCount = 0;
+        int clientCount = 0;
 
         System.out.printf("<Now serving clients on port %d...>%n", this.serverSocket.getLocalPort());
 
@@ -55,9 +56,9 @@ public final class ReservationServer {
 
             handlerThread.start();
 
-            System.out.printf("<Client %d connected...>%n", connectionCount);
+            System.out.printf("<Client %d connected...>%n", clientCount);
 
-            connectionCount++;
+            clientCount++;
         }
     } //serveClients
 
@@ -73,7 +74,7 @@ public final class ReservationServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
     /**
