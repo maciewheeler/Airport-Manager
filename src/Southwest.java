@@ -1,4 +1,5 @@
-  
+import java.util.ArrayList;
+
 /**
  * A class for the Southwest airline.
  *
@@ -6,30 +7,48 @@
  * @version November 18, 2019
  */
 public class Southwest implements Airline {
-   private boolean full = false; //true when flight is full
-    private Gate gate;
-   ArrayList<Passenger> passengers = new ArrayList<>();
-    private int passengerCounter = passengers.size();
-    final int flightNumber = 18000;
-    public void statusChanger() {
-        if (passengerCounter >= passengerMax) {
-            full = true;
-        }
+
+    private ArrayList<Passenger> southwestPassengers = new ArrayList<>();
+    private final Gate southwestGate = new Gate();
+    private String nameOfAirline = "Southwest Airlines";
+
+    public void addPassenger(Passenger passenger) {
+        southwestPassengers.add(passenger);
     }
-    public int getPassengerCounter() {
-        return passengerCounter;
+
+    public ArrayList<Passenger> getDeltaPassengers() {
+        return southwestPassengers;
     }
-    public void setGate() {
-        if (passengerCounter > 0) {
-            gate = new Gate (this.gate.gateNumber, this.gate.terminal);
-        }
+
+    public int getCurrentPassengerCount() {
+        return southwestPassengers.size();
     }
-    @Override
-    public String getNameOfAirline() {
-        return "Southwest";
+
+    public int getMaxPassenger() {
+        return passengerMax;
     }
 
     public int getFlightNumber() {
         return flightNumber;
+    }
+
+    public int getAvailableSeats() {
+        return passengerMax - southwestPassengers.size();
+    }
+
+    public String getNameOfAirline() {
+        return nameOfAirline;
+    }
+
+    public String getDeltaGate() {
+        return southwestGate.getGate();
+    }
+
+    public String getAirlineMessage() {
+        return "Southwest Airlines is proud to offer flights to Purdue University." + "\n" +
+                "We are happy to offer free inflight WiFi, as well as our amazing snacks." + "\n" +
+                "In addition, we offer flights for much cheaper than other airlines, and offer two free checked" +
+                " bags." + "\n" +
+                "We hope you choose Southwest for your next flight.";
     }
 }
