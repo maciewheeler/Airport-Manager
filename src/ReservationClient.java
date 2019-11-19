@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
 
@@ -86,22 +84,34 @@ public final class ReservationClient {
         }
 
         port = Integer.parseInt(portString);
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame("Purdue University Flight Reservation System");
-                frame.setSize(800, 800);
-                frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                JPanel panel1 = new JPanel(new BorderLayout());
-                JTextField openingText = new JTextField("Welcome to the Purdue University Airline Reservation" +
-                        " Management System!");
-                openingText.setFont(new Font("Courier", Font.BOLD, 20));
-                panel1.add(openingText);
-                frame.add(panel1, BorderLayout.NORTH);
-                frame.setVisible(true);
-            }
-        });
+        
+        try {
+            socket = new Socket(hostname, port);
+            socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    JFrame frame = new JFrame("Purdue University Flight Reservation System");
+                    frame.setSize(800, 800);
+                    frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    
+                    JPanel panel1 = new JPanel(new BorderLayout());
+                    JTextField openingText = new JTextField("Welcome to the Purdue University Airline Reservation" +
+                            " Management System!");
+                    openingText.setFont(new Font("Courier", Font.BOLD, 20));
+                    panel1.add(openingText);
+                    
+                    JPanel panel2 = new JPanel(new BorderLayout());
+                    frame.add(panel1, BorderLayout.NORTH);
+                    frame.setVisible(true);
+                }
+            }); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
 
     } //main
 
@@ -128,9 +138,6 @@ public final class ReservationClient {
 //        frame.setVisible(true);
 //    } //createFrame
 }
-class ResponseListener implements ActionListener {
+class ResponseListener {
 
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
