@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -59,15 +58,23 @@ public final class ReservationServer {
             System.out.printf("<Client %d connected...>%n", connectionCount);
 
             connectionCount++;
-
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
         }
     } //serveClients
+
+    public void updateFile() throws FileNotFoundException, IOException {
+        try {
+            File f = new File("reservations.txt");
+            FileReader fr = new FileReader(f);
+            FileWriter fw = new FileWriter(f);
+            BufferedReader bfr = new BufferedReader(fr);
+            BufferedWriter bfw = new BufferedWriter(fw);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
 
     /**
      * Returns the hash code of this server.
