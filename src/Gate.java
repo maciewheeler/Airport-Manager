@@ -13,7 +13,6 @@ public class Gate implements Serializable {
     int gateNumber;
     String terminal;
 
-
     public Gate() {
         this.gateNumber = getGateNumber();
         this.terminal = getGateLetter();
@@ -40,5 +39,9 @@ public class Gate implements Serializable {
     public int getGateNumber() {
         Random rand = new Random();
         return rand.nextInt(18) + 1;
+    }
+
+    public String getGate() {
+        return getGateLetter() + getGateNumber();
     }
 }
