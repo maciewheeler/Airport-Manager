@@ -19,35 +19,37 @@ public class BoardingPass implements Serializable {
     Passenger passenger;
     Airline airline;
     Gate gate;
-    private String airlineName;
-    private final int flightNumber = 18000;
-
-
-    public BoardingPass(Passenger p, Airline a, Gate g) {
+    String gateToString;
+    String airlineName;
+    public BoardingPass(Passenger p, Airline a) {
         this.passenger = p;
         this.airline = a;
-        this.gate = g;
+        if (airline instanceof Delta) {
+            this.gate = Delta.getDeltaGate();
+            this.gateToString = Delta.getDeltaGateString();
+            this.airlineName = Delta.getNameOfAirline();
+        }
+        if (airline instanceof Southwest) {
+            this.gate = Southwest.getSouthwestGate();
+            this.gateToString = Southwest.getSouthwestGateToString();
+            this.airlineName = Southwest.getNameOfAirline();
+        }
+        if (airline instanceof Alaska) {
+            this.gate = Alaska.getAlaskaGate();
+            this.gateToString = Alaska.getAlaskaGateToString();
+            this.airlineName = Alaska.getNameOfAirline();
+        }
+        
     }
-    public String getNameOfAirline() {
-        return airlineName;
-    }
-
-    public int getFlightNumber() {
-        return flightNumber;
-    }
-    public void addPassenger(Passenger p) {
-        this.airline.passengers.add(p);
-    }
-
-
-
+    
+    
     public String writeBoardingPass() {
         String boardingPass = "----------------------------------------" + "\n" +
-                "BOARDING PASS FOR FLIGHT 18000 WITH " + "\n" +
+                "BOARDING PASS FOR FLIGHT 18000 WITH " + airlineName + "\n" + 
                 "PASSENGER FIRST NAME: " + passenger.getFirstName() + "\n" +
                 "PASSENGER LAST NAME: " + passenger.getLastName() + "\n" +
                 "PASSENGER AGE: " + passenger.getAge() + "\n" +
-                "You can now begin boarding at gate " + gate.getGate() + "\n" +
+                "You can now begin boarding at gate " + gateToString + "\n" +
                 "----------------------------------------";
         return boardingPass;
     }
