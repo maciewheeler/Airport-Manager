@@ -5,13 +5,21 @@
  * @version November 18, 2019
  */
 public class Alaska implements Airline {
-    int passengerCounter = 0;
-    boolean full = false; //true when flight is full
+   private boolean full = false; //true when flight is full
+    private Gate gate;
+    private int passengerCounter = passengers.size();
     final int flightNumber = 18000;
-
     public void statusChanger() {
         if (passengerCounter >= passengerMax) {
             full = true;
+        }
+    }
+    public int getPassengerCounter() {
+        return passengerCounter;
+    }
+    public void setGate() {
+        if (passengerCounter > 0) {
+            gate = new Gate (this.gate.gateNumber, this.gate.terminal);
         }
     }
     @Override
