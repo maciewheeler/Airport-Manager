@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A class for the Alaska airline.
  *
@@ -5,30 +7,50 @@
  * @version November 18, 2019
  */
 public class Alaska implements Airline {
-   private boolean full = false; //true when flight is full
-    private Gate gate;
-    ArrayList<Passenger> passengers = new ArrayList<>();
-    private int passengerCounter = passengers.size();
-    final int flightNumber = 18000;
-    public void statusChanger() {
-        if (passengerCounter >= passengerMax) {
-            full = true;
-        }
+
+    private ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
+    private final Gate alaskaGate = new Gate();
+    private String nameOfAirline = "Alaska Airlines";
+
+    public void addPassenger(Passenger passenger) {
+        alaskaPassengers.add(passenger);
     }
-    public int getPassengerCounter() {
-        return passengerCounter;
+
+    public ArrayList<Passenger> getAlaskaPassengers() {
+        return alaskaPassengers;
     }
-    public void setGate() {
-        if (passengerCounter > 0) {
-            gate = new Gate (this.gate.gateNumber, this.gate.terminal);
-        }
+
+    public int getCurrentPassengerCount() {
+        return alaskaPassengers.size();
     }
-    @Override
-    public String getNameOfAirline() {
-        return "Alaska";
+
+    public int getMaxPassenger() {
+        return passengerMax;
     }
 
     public int getFlightNumber() {
         return flightNumber;
+    }
+
+    public int getAvailableSeats() {
+        return passengerMax - alaskaPassengers.size();
+    }
+
+    public String getNameOfAirline() {
+        return nameOfAirline;
+    }
+
+    public String getDeltaGate() {
+        return alaskaGate.getGate();
+    }
+
+    public String getAirlineMessage() {
+        return "Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue" +
+                " University." + "\n" +
+                "We primarily westward, and often have stops in Alaska and California." + "\n" +
+                "We have first class amenities, even in coach class." + "\n" +
+                "We provide fun snacks such as pretzels and goldfish." + "\n" +
+                "We also have comfortable seats and free WiFi." + "\n" +
+                "We hope you choose Alaska Airlines for your next itinerary.";
     }
 }
