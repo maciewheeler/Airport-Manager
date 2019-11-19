@@ -7,6 +7,7 @@
 public class Alaska implements Airline {
     int passengerCounter = 0;
     boolean full = false; //true when flight is full
+    final int flightNumber = 18000;
 
     public void statusChanger() {
         if (passengerCounter >= passengerMax) {
@@ -14,7 +15,11 @@ public class Alaska implements Airline {
         }
     }
     @Override
-    public String getName() {
+    public String getNameOfAirline() {
         return "Alaska";
+    }
+
+    public int getFlightNumber() {
+        return flightNumber;
     }
 }
