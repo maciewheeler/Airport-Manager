@@ -85,48 +85,44 @@ public final class ReservationClient {
 
         port = Integer.parseInt(portString);
 
-        try {
-            socket = new Socket(hostname, port);
-
-//            socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//
-//            socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-//            SwingUtilities.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    createGUI();
-//                }
-//            });
-
-        createFrame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new JFrame("Purdue University Flight Reservation System");
+                frame.setSize(500, 500);
+                frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                JPanel panel1 = new JPanel(new BorderLayout());
+                JTextArea openingText = new JTextArea("Welcome to the Purdue University Airline Reservation Management System!");
+                panel1.add(openingText);
+                frame.add(panel1, BorderLayout.NORTH);
+                frame.setVisible(true);
+            }
+        });
 
     } //main
 
-    public static void createPanels() {
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(new BorderLayout());
-
-        JPanel panel2 = new JPanel();
-        panel2.setLayout(new BorderLayout());
-
-        JPanel panel3 = new JPanel();
-        panel3.setLayout(new BorderLayout());
-    } //createPanels
-
-    public static void createButtons() {
-        JButton button1 = new JButton();
-    } //createButtons
-
-    public static void createFrame() {
-        JFrame frame = new JFrame("Purdue University Flight Reservation System");
-        frame.setSize(500, 500);
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setVisible(true);
-    } //createFrame
+//    public static void createPanels() {
+//        JPanel panel1 = new JPanel();
+//        panel1.setLayout(new BorderLayout());
+//
+//        JPanel panel2 = new JPanel();
+//        panel2.setLayout(new BorderLayout());
+//
+//        JPanel panel3 = new JPanel();
+//        panel3.setLayout(new BorderLayout());
+//    } //createPanels
+//
+//    public static void createButtons() {
+//        JButton button1 = new JButton();
+//
+//    } //createButtons
+//
+//    public static void createFrame() {
+//        JFrame frame = new JFrame("Purdue University Flight Reservation System");
+//        frame.setSize(500, 500);
+//        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+//        frame.setVisible(true);
+//    } //createFrame
 }
 class ResponseListener implements ActionListener {
 
