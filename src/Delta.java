@@ -1,27 +1,27 @@
 import java.util.ArrayList;
 
 /**
- * A class for the Alaska airline.
+ * A class for the Delta airline.
  *
  * @author Macie Wheeler and Keya Mahtani
  * @version November 18, 2019
  */
-public class Alaska implements Airline {
+public class Delta implements Airline {
 
-    private ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
-    private final Gate alaskaGate = new Gate();
-    private String nameOfAirline = "Alaska Airlines";
+    private ArrayList<Passenger> deltaPassengers = new ArrayList<>();
+    private final Gate deltaGate = new Gate();
+    private String nameOfAirline = "Delta Airlines";
 
     public void addPassenger(Passenger passenger) {
-        alaskaPassengers.add(passenger);
+        deltaPassengers.add(passenger);
     }
 
-    public ArrayList<Passenger> getAlaskaPassengers() {
-        return alaskaPassengers;
+    public ArrayList<Passenger> getDeltaPassengers() {
+        return deltaPassengers;
     }
 
     public int getCurrentPassengerCount() {
-        return alaskaPassengers.size();
+        return deltaPassengers.size();
     }
 
     public int getMaxPassenger() {
@@ -33,7 +33,7 @@ public class Alaska implements Airline {
     }
 
     public int getAvailableSeats() {
-        return passengerMax - alaskaPassengers.size();
+        return passengerMax - deltaPassengers.size();
     }
 
     public String getNameOfAirline() {
@@ -41,16 +41,14 @@ public class Alaska implements Airline {
     }
 
     public String getDeltaGate() {
-        return alaskaGate.getGate();
+        return deltaGate.getGate();
     }
 
     public String getAirlineMessage() {
-        return "Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue" +
-                " University." + "\n" +
-                "We primarily westward, and often have stops in Alaska and California." + "\n" +
-                "We have first class amenities, even in coach class." + "\n" +
-                "We provide fun snacks such as pretzels and goldfish." + "\n" +
-                "We also have comfortable seats and free WiFi." + "\n" +
-                "We hope you choose Alaska Airlines for your next itinerary.";
+        return "Delta Airlines is proud to be one of the five premier Airlines at Purdue University. " + "\n" +
+                "We offer extremely exceptional services, with free limited WiFi for all customers." + "\n" +
+                "Passengers who use T-Mobile as a cell phone carrier get additional benefits." + "\n" +
+                "We are also happy to offer power outlets in each seat for passenger use." + "\n" +
+                "We hope you choose to fly Delta as your next Airline.";
     }
 }
