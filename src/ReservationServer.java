@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -58,6 +59,13 @@ public final class ReservationServer {
             System.out.printf("<Client %d connected...>%n", connectionCount);
 
             connectionCount++;
+
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
         }
     } //serveClients
 
