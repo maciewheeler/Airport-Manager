@@ -13,5 +13,6 @@ public interface Airline extends Serializable {
 
     String getNameOfAirline();
 
+    ArrayList<Passenger> passengers = new ArrayList<>();
     int getFlightNumber();
 }
