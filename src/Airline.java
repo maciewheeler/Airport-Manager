@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * An interface for the airline.
@@ -11,9 +10,17 @@ import java.util.ArrayList;
 public interface Airline extends Serializable {
 
     int passengerMax = 100;
+    int flightNumber = 18000;
 
-    String getNameOfAirline();
+    void addPassenger(Passenger passenger);
 
-    ArrayList<Passenger> passengers = new ArrayList<>();
+    int getCurrentPassengerCount();
+
+    int getMaxPassenger();
+
     int getFlightNumber();
+
+    int getAvailableSeats();
+
+    String getAirlineMessage();
 }
