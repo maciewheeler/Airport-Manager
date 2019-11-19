@@ -14,33 +14,31 @@ public class Gate implements Serializable {
     String terminal;
 
 
-    public Gate(int gateNumber, String terminal) {
-        this.gateNumber = gateNumber;
-        this.terminal = terminal;
+    public Gate() {
+        this.gateNumber = getGateNumber();
+        this.terminal = getGateLetter();
     }
-    public void getGateLetter() {
+
+    public String getGateLetter() {
         Random rand = new Random();
         int gateLetter = rand.nextInt(3);
+        String gateLetterAsString = "";
         switch (gateLetter) {
             case 0:
-                this.terminal = "A";
+                gateLetterAsString = "A";
                 break;
             case 1:
-                this.terminal = "B";
+                gateLetterAsString = "B";
                 break;
             case 2:
-                this.terminal = "C";
+                gateLetterAsString = "C";
                 break;
         }
+        return gateLetterAsString;
     }
 
-
-    public void getGateNumber() {
+    public int getGateNumber() {
         Random rand = new Random();
-        this.gateNumber = rand.nextInt(18);
-    }
-
-    public String getGate() {
-        return this.terminal + this.gateNumber;
+        return rand.nextInt(18) + 1;
     }
 }
