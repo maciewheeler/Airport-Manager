@@ -11,35 +11,36 @@ import java.util.Random;
 public class Gate implements Serializable {
 
     int gateNumber;
-    String letter;
+    String terminal;
 
-    public Gate(int gateNumber, String letter) {
+
+    public Gate(int gateNumber, String terminal) {
         this.gateNumber = gateNumber;
-        this.letter = letter;
+        this.terminal = terminal;
     }
-
-    public void getGateNumber() {
-        Random rand = new Random();
-        this.gateNumber = rand.nextInt(18) + 1;
-    }
-
     public void getGateLetter() {
         Random rand = new Random();
         int gateLetter = rand.nextInt(3);
         switch (gateLetter) {
             case 0:
-                this.letter = "A";
+                this.terminal = "A";
                 break;
             case 1:
-                this.letter = "B";
+                this.terminal = "B";
                 break;
             case 2:
-                this.letter = "C";
+                this.terminal = "C";
                 break;
         }
     }
 
+
+    public void getGateNumber() {
+        Random rand = new Random();
+        this.gateNumber = rand.nextInt(18);
+    }
+
     public String getGate(int gateNumber, String letter) {
-        return this.letter + this.gateNumber;
+        return this.terminal + this.gateNumber;
     }
 }
