@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * A class to create a passenger.
  *
@@ -5,7 +7,7 @@
  * @version November 18, 2019
  */
 
-public class Passenger {
+public class Passenger implements Serializable {
 
     String firstName;
     String lastName;
