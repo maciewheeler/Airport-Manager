@@ -40,7 +40,7 @@ public class Gate implements Serializable {
         this.gateNumber = rand.nextInt(18);
     }
 
-    public String getGate(int gateNumber, String letter) {
+    public String getGate() {
         return this.terminal + this.gateNumber;
     }
 }
