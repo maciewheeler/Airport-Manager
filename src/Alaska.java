@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Alaska implements Airline {
 
     private ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
-    private final Gate alaskaGate = new Gate();
-    private String nameOfAirline = "Alaska Airlines";
+    private static Gate alaskaGate = new Gate();
+    private static String nameOfAirline = "Alaska Airlines";
 
     public void addPassenger(Passenger passenger) {
         alaskaPassengers.add(passenger);
@@ -36,12 +36,15 @@ public class Alaska implements Airline {
         return passengerMax - alaskaPassengers.size();
     }
 
-    public String getNameOfAirline() {
+    public static String getNameOfAirline() {
         return nameOfAirline;
     }
 
-    public String getDeltaGate() {
+    public static String getAlaskaGateToString() {
         return alaskaGate.getGate();
+    }
+    public static Gate getAlaskaGate() {
+        return alaskaGate;
     }
 
     public String getAirlineMessage() {
