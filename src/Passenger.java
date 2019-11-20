@@ -13,10 +13,10 @@ public class Passenger implements Serializable {
     private String lastName;
     private int age;
 
-    public Passenger(String fname, String lname, int age) {
-        this.firstName = fname;
-        this.lastName = lname;
-        this.age = age;
+    public Passenger() {
+        this.firstName = getFirstName();
+        this.lastName = getLastName();
+        this.age = getAge();
     }
 
     public int getAge() {
