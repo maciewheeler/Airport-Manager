@@ -67,6 +67,7 @@ public final class ReservationServer {
             File f = new File("reservations.txt");
             FileReader fr = new FileReader(f);
             FileWriter fw = new FileWriter(f);
+
             BufferedReader bfr = new BufferedReader(fr);
             BufferedWriter bfw = new BufferedWriter(fw);
         } catch (FileNotFoundException e) {
@@ -74,6 +75,9 @@ public final class ReservationServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void run() {
 
     }
 
@@ -232,3 +236,14 @@ class ClientHandler implements Runnable {
         return String.format(format, this.clientSocket);
     } //toString
 }
+
+//add the reservations.txt
+
+
+//reservationserver
+//edit serveClients
+
+//clienthandler
+//edit run method
+
+//putting run method in server?? main method???
