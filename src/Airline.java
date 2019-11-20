@@ -21,6 +21,4 @@ public interface Airline extends Serializable {
     int getFlightNumber();
 
     int getAvailableSeats();
-
-    String getAirlineMessage();
 }
