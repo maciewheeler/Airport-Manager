@@ -43,11 +43,12 @@ public class Alaska implements Airline {
     public static String getAlaskaGateToString() {
         return alaskaGate.getGate();
     }
+
     public static Gate getAlaskaGate() {
         return alaskaGate;
     }
 
-    public String getAirlineMessage() {
+    public static String getAirlineMessage() {
         return "Alaska Airlines is proud to serve the strong and knowledgeable Boilermakers from Purdue" +
                 " University." + "\n" +
                 "We primarily westward, and often have stops in Alaska and California." + "\n" +
