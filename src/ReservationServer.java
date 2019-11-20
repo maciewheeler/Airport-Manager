@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.AnnotatedArrayType;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Objects;
@@ -14,7 +15,14 @@ import java.util.Objects;
  */
 
 public final class ReservationServer {
-
+    private Delta delta = new Delta();
+    private Southwest southwest = new Southwest();
+    private Alaska alaska = new Alaska();
+    private Gate gate = new Gate();
+    private Passenger passenger = new Passenger();
+    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, delta);
+    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, alaska);
+    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, southwest);
     /**
      * The server socket of this server.
      */
@@ -67,7 +75,6 @@ public final class ReservationServer {
             File f = new File("reservations.txt");
             FileReader fr = new FileReader(f);
             FileWriter fw = new FileWriter(f);
-
             BufferedReader bfr = new BufferedReader(fr);
             BufferedWriter bfw = new BufferedWriter(fw);
         } catch (FileNotFoundException e) {
@@ -75,9 +82,6 @@ public final class ReservationServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void run() {
 
     }
 
@@ -236,14 +240,3 @@ class ClientHandler implements Runnable {
         return String.format(format, this.clientSocket);
     } //toString
 }
-
-//add the reservations.txt
-
-
-//reservationserver
-//edit serveClients
-
-//clienthandler
-//edit run method
-
-//putting run method in server?? main method???
