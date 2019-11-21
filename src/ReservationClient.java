@@ -191,6 +191,18 @@ public final class ReservationClient {
                                     airlineNames.addItem("Alaska");
                                     panel2.add(airlineNames);
 
+//                                    String selectedAirline = airlineNames.getSelectedItem().toString();
+//                                    JLabel message = new JLabel();
+//                                    if (selectedAirline.equals("Delta")) {
+//                                        message.setText(Delta.getAirlineMessage());
+//                                    }
+//                                    if (selectedAirline.equals("Southwest")) {
+//                                       message.setText(Southwest.getAirlineMessage());
+//                                    }
+//                                    if (selectedAirline.equals("Alaska")) {
+//                                        message.setText(Alaska.getAirlineMessage());
+//                                    }
+
                                     airlineNames.addItemListener(new ItemListener() {
                                         @Override
                                         public void itemStateChanged(ItemEvent itemEvent) {
@@ -206,7 +218,8 @@ public final class ReservationClient {
                                             }
                                             panel3.add(message);
                                         }
-                                    });
+                                    });//DOES NOT WORK (PRINTING AIRLINE MESSAGE)
+
 
                                     JPanel panel4 = new JPanel();
                                     JButton chooseThisFlightButton = new JButton("Choose this flight");
@@ -235,8 +248,9 @@ public final class ReservationClient {
 
                                             //fourth frame
                                             frame.setLayout(new BorderLayout());
-
-                                            JLabel fourthText = new JLabel("Are you sure that you want to book a flight on (selected airline)?"); //need to add name of selected airline somehow??
+                                            String selectedAirline = (String) airlineNames.getSelectedItem();
+                                            JLabel fourthText = new JLabel("Are you sure that you want to book a flight on "
+                                                    + selectedAirline + "?"); //need to add name of selected airline somehow??
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
