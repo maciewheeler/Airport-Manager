@@ -246,13 +246,16 @@ public final class ReservationClient {
                                             //fourth frame
                                             frame.setLayout(new BorderLayout());
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
-                                            JLabel fourthText = new JLabel("Are you sure that you want to book a flight on "
-                                                    + selectedAirline + " Airlines?"); //need to add name of selected airline somehow??
+                                            JLabel fourthText = new JLabel("Are you sure that you want to" +
+                                                    " book a flight on " + selectedAirline + " Airlines?");
+                                            //need to add name of selected airline somehow??
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
-                                            JButton noIWantADifferentFlightButton = new JButton("No, I want a different flight.");
-                                            JButton yesIWantthisFlightButton = new JButton("Yes, I want this flight.");
+                                            JButton noIWantADifferentFlightButton = new JButton("No, I want a" +
+                                                    " different flight.");
+                                            JButton yesIWantthisFlightButton = new JButton("Yes, I want this" +
+                                                    " flight.");
                                             panel3.add(exitButton);
                                             panel3.add(noIWantADifferentFlightButton);
                                             panel3.add(yesIWantthisFlightButton);
@@ -272,14 +275,16 @@ public final class ReservationClient {
 
 
                                                     //fifth frame
-                                                    frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+                                                    frame.setLayout(new BoxLayout(frame.getContentPane(),
+                                                            BoxLayout.Y_AXIS));
 
                                                     JPanel panel5 = new JPanel();
                                                     JPanel panel6 = new JPanel();
                                                     JPanel panel7 = new JPanel();
                                                     JPanel panel8 = new JPanel();
 
-                                                    JLabel fifthText = new JLabel("Please input your information below.");
+                                                    JLabel fifthText = new JLabel("Please input your" +
+                                                            " information below.");
                                                     fifthText.setFont(new Font("Courier", Font.BOLD, 24));
                                                     panel1.add(fifthText);
 
@@ -332,12 +337,16 @@ public final class ReservationClient {
                                                         @Override
                                                         public void actionPerformed(ActionEvent e) {
                                                             //sixth frame
-                                                            String confirmMessage = "Are all the details you entered correct?" + "\n" +
-                                                                    "The passenger's name is (passenger first name and last name) and their age is" +
+                                                            String confirmMessage = "Are all the details you" +
+                                                                    " entered correct?" + "\n" +
+                                                                    "The passenger's name is (passenger first name" +
+                                                                    " and last name) and their age is" +
                                                                     " (passenger age)." + "\n" +
-                                                                    "If all the information shown is correct, select the Yes" + "\n" +
+                                                                    "If all the information shown is correct, select" +
+                                                                    " the Yes" + "\n" +
                                                                     "button below, otherwise, select the No button.";
-                                                            int confirm = JOptionPane.showConfirmDialog(null, confirmMessage,
+                                                            int confirm = JOptionPane.showConfirmDialog
+                                                                    (null, confirmMessage,
                                                                     "Confirm Info", JOptionPane.YES_NO_OPTION);
 
                                                             if (confirm == JOptionPane.YES_OPTION) {
@@ -367,31 +376,38 @@ public final class ReservationClient {
                                                                 test.setLastName("mahtani");
                                                                 test.setAge(18);
                                                                 if (selectedAirline.equals("Delta")) {
-                                                                   selectedGate = Delta.getDeltaGateString();
-                                                                   boardingPass = new BoardingPass(test, "Delta");
+                                                                    selectedGate = Delta.getDeltaGateString();
+                                                                    boardingPass = new BoardingPass(test, "Delta");
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
-                                                                    boardingPass = new BoardingPass(test, "Southwest");
+                                                                    boardingPass = new BoardingPass(test,
+                                                                            "Southwest");
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
                                                                     boardingPass = new BoardingPass(test, "Alaska");
                                                                 }
-                                                                JLabel seventhText = new JLabel("Flight data displaying for " + selectedAirline + " Airlines" +
+                                                                JLabel seventhText = new JLabel("Flight data" +
+                                                                        " displaying for " + selectedAirline +
+                                                                        " Airlines" +
                                                                         "\n" + "Enjoy your flight!" + "\n" +
-                                                                        "Flight is now boarding at Gate " + selectedGate);
-                                                                seventhText.setFont(new Font("Courier", Font.BOLD, 24));
+                                                                        "Flight is now boarding at Gate "
+                                                                        + selectedGate);
+                                                                seventhText.setFont(new Font("Courier",
+                                                                        Font.BOLD, 24));
                                                                 panel1.add(seventhText);
 
                                                                 //somehow get number of passengers (on scrollpane???)
 
                                                                 JScrollPane scrollPane1 = new JScrollPane(panel2);
                                                                 //somehow get the arraylist in the scroll pane??
-                                                                JLabel printBP = new JLabel(boardingPass.writeBoardingPass());
+                                                                JLabel printBP = new JLabel(boardingPass.
+                                                                        writeBoardingPass());
                                                                 panel3.add(printBP);
                                                                 //somehow get the boarding pass on panel3??
 
 
-                                                                JButton refreshFlightStatusButton = new JButton("Refresh Flight Status");
+                                                                JButton refreshFlightStatusButton = new JButton
+                                                                        ("Refresh Flight Status");
                                                                 panel4.add(exitButton);
                                                                 panel4.add(refreshFlightStatusButton);
 
@@ -438,9 +454,9 @@ public final class ReservationClient {
 //                                    "Purdue University Airline Management System!", "Thank You!",
 //                            JOptionPane.PLAIN_MESSAGE);
                 }
-          });
-       } catch (IOException e) {
-           e.printStackTrace();
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     } //main
 }
