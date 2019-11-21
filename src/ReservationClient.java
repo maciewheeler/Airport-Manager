@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 import java.net.Socket;
 
@@ -189,34 +191,22 @@ public final class ReservationClient {
                                     airlineNames.addItem("Alaska");
                                     panel2.add(airlineNames);
 
-                                    String selectedAirline = (String) airlineNames.getSelectedItem();
-                                    JLabel message = new JLabel();
-                                    if (selectedAirline.equals("Delta")) {
-                                        message.setText(Delta.getAirlineMessage());
-                                    }
-                                    if (selectedAirline.equals("Southwest")) {
-                                       message.setText(Southwest.getAirlineMessage());
-                                    }
-                                    if (selectedAirline.equals("Alaska")) {
-                                        message.setText(Alaska.getAirlineMessage());
-                                    }
-
-//                                    airlineNames.addItemListener(listener -> {
-//                                        String selectedAirline;
-//                                        JComboBox getSelection = (JComboBox) listener.getSource();
-//                                        selectedAirline = (String) airlineNames.getSelectedItem();
-//                                        JLabel message = new JLabel();
-//                                        if (selectedAirline.equals("Delta")) {
-//                                            message.setText(Delta.getAirlineMessage());
-//                                        } else if (selectedAirline.equals("Southwest")) {
-//                                            message.setText(Southwest.getAirlineMessage());
-//                                        } else if (selectedAirline.equals("Alaska")) {
-//                                            message.setText(Alaska.getAirlineMessage());
-//                                        }
-//                                        panel3.add(message);
-//                                    });
-
-                                    panel3.add(message);
+                                    airlineNames.addItemListener(new ItemListener() {
+                                        @Override
+                                        public void itemStateChanged(ItemEvent itemEvent) {
+//                                            JComboBox getSelection = (JComboBox) itemEvent.getSource();
+                                            String selectedAirline = (String) airlineNames.getSelectedItem();
+                                            JLabel message = new JLabel();
+                                            if (selectedAirline.equals("Delta")) {
+                                                message.setText(Delta.getAirlineMessage());
+                                            } else if (selectedAirline.equals("Southwest")) {
+                                                message.setText(Southwest.getAirlineMessage());
+                                            } else if (selectedAirline.equals("Alaska")) {
+                                                message.setText(Alaska.getAirlineMessage());
+                                            }
+                                            panel3.add(message);
+                                        }
+                                    });
 
                                     JPanel panel4 = new JPanel();
                                     JButton chooseThisFlightButton = new JButton("Choose this flight");
