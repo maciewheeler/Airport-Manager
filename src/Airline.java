@@ -21,4 +21,14 @@ public interface Airline extends Serializable {
     int getFlightNumber();
 
     int getAvailableSeats();
+
 }
+//gates printing differently
+//spacing of lines
+//airline messages combobox
+//if the button had to go back a frame 
+//scroll pane
+//refresh flight status
+//text boxes not working
+//back slash
+//server client
