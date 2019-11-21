@@ -106,7 +106,7 @@ public final class ReservationClient {
                     JLabel openingText = new JLabel("Welcome to the Purdue University Airline Reservation" +
                             "\n" + "Management System!");
                     openingText.setFont(new Font("Courier", Font.BOLD, 24));
-                    panel1.add(openingText, BorderLayout.CENTER); //maybe use this center thing???
+                    panel1.add(openingText, BorderLayout.CENTER);
 
                     JPanel panel2 = new JPanel();
                     JLabel imageLabel = new JLabel();
@@ -124,19 +124,20 @@ public final class ReservationClient {
                     frame.add(panel2, BorderLayout.CENTER);
                     frame.add(panel3, BorderLayout.SOUTH);
                     frame.pack();
-                    frame.setVisible(true); //do we need to make unvisible at some point??
+                    frame.setVisible(true);
 
                     exitButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
+                            
+                            //eighth frame
                             JOptionPane.showMessageDialog(null, "Thank you for using the " +
                                             "Purdue University Airline Management System!", "Thank You!",
                                     JOptionPane.PLAIN_MESSAGE);
                             frame.dispose();
                         }
-                    });
-
-
+                    }); //exit button
+                    
                     bookAFlightButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -162,7 +163,6 @@ public final class ReservationClient {
                             frame.add(panel3, BorderLayout.SOUTH);
                             frame.pack();
                             frame.setVisible(true);
-                            //end of frame 2
 
                             yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
                                 @Override
@@ -248,7 +248,6 @@ public final class ReservationClient {
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
                                             JLabel fourthText = new JLabel("Are you sure that you want to" +
                                                     " book a flight on " + selectedAirline + " Airlines?");
-                                            //need to add name of selected airline somehow??
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
@@ -272,8 +271,7 @@ public final class ReservationClient {
                                                     panel1.removeAll();
                                                     panel3.removeAll();
                                                     frame.remove(panel1);
-
-
+                                                    
                                                     //fifth frame
                                                     frame.setLayout(new BoxLayout(frame.getContentPane(),
                                                             BoxLayout.Y_AXIS));
@@ -292,19 +290,19 @@ public final class ReservationClient {
                                                     panel2.add(firstNameText);
                                                     JTextField firstNameTextField = new JTextField();
                                                     panel3.add(firstNameTextField);
-                                                    JLabel label = new JLabel();
-                                                    label.setVisible(false);
-                                                    firstNameTextField.addKeyListener(new KeyAdapter() {
-                                                        @Override
-                                                        public void keyPressed(KeyEvent e) {
-                                                            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                                                                String firstName = firstNameTextField.getText();
-                                                                label.setText(firstName);
-                                                                label.setVisible(true);
-                                                                panel3.add(label);
-                                                            }
-                                                        }
-                                                    });
+//                                                    JLabel label = new JLabel();
+//                                                    label.setVisible(false);
+//                                                    firstNameTextField.addKeyListener(new KeyAdapter() {
+//                                                        @Override
+//                                                        public void keyPressed(KeyEvent e) {
+//                                                            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+//                                                                String firstName = firstNameTextField.getText();
+//                                                                label.setText(firstName);
+//                                                                label.setVisible(true);
+//                                                                panel3.add(label);
+//                                                            }
+//                                                        }
+//                                                    }); 
 
 
                                                     JLabel lastNameText = new JLabel("What is your last name?");
@@ -336,6 +334,7 @@ public final class ReservationClient {
                                                     nextButton.addActionListener(new ActionListener() {
                                                         @Override
                                                         public void actionPerformed(ActionEvent e) {
+                                                            
                                                             //sixth frame
                                                             String confirmMessage = "Are all the details you" +
                                                                     " entered correct?" + "\n" +
@@ -371,20 +370,20 @@ public final class ReservationClient {
                                                                 //seventh frame
                                                                 BoardingPass boardingPass = null;
                                                                 String selectedGate = "";
-                                                                Passenger test = new Passenger();
-                                                                test.setFirstName("keya");
-                                                                test.setLastName("mahtani");
-                                                                test.setAge(18);
+//                                                                Passenger test = new Passenger();
+//                                                                test.setFirstName("keya");
+//                                                                test.setLastName("mahtani");
+//                                                                test.setAge(18);
                                                                 if (selectedAirline.equals("Delta")) {
                                                                     selectedGate = Delta.getDeltaGateString();
-                                                                    boardingPass = new BoardingPass(test, "Delta");
+                                                                    boardingPass = new BoardingPass(, "Delta");
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
-                                                                    boardingPass = new BoardingPass(test,
+                                                                    boardingPass = new BoardingPass(,
                                                                             "Southwest");
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
-                                                                    boardingPass = new BoardingPass(test, "Alaska");
+                                                                    boardingPass = new BoardingPass(, "Alaska");
                                                                 }
                                                                 JLabel seventhText = new JLabel("Flight data" +
                                                                         " displaying for " + selectedAirline +
@@ -395,15 +394,16 @@ public final class ReservationClient {
                                                                 seventhText.setFont(new Font("Courier",
                                                                         Font.BOLD, 24));
                                                                 panel1.add(seventhText);
-
-                                                                //somehow get number of passengers (on scrollpane???)
+                                                                //try changing gates to final inside each airline class
 
                                                                 JScrollPane scrollPane1 = new JScrollPane(panel2);
                                                                 //somehow get the arraylist in the scroll pane??
+                                                                //somehow get number of passengers (on scrollpane???)
+                                                                
                                                                 JLabel printBP = new JLabel(boardingPass.
                                                                         writeBoardingPass());
                                                                 panel3.add(printBP);
-                                                                //somehow get the boarding pass on panel3??
+                                                                //fix gate on boarding pass??
 
 
                                                                 JButton refreshFlightStatusButton = new JButton
@@ -417,15 +417,14 @@ public final class ReservationClient {
                                                                 frame.add(panel4);
                                                                 frame.pack();
                                                                 frame.setVisible(true);
+                                                            } else if (confirm == JOptionPane.NO_OPTION) {
+                                                                //back to fifth frame
                                                             }
-
-
                                                         }
                                                     }); // next button
                                                 }
-                                            }); // yes i want this flight
-
-
+                                            }); // yes i want this flight button
+                                            
                                             noIWantADifferentFlightButton.addActionListener(new ActionListener() {
                                                 @Override
                                                 public void actionPerformed(ActionEvent e) {
@@ -435,26 +434,18 @@ public final class ReservationClient {
                                                     frame.remove(panel1);
                                                     frame.remove(panel3);
 
-
+                                                    //back to third frame
 
                                                 }
-                                            }); // no i don't want this flight
+                                            }); // no i want a different flight button
                                         }
                                     }); //choose this flight button
                                 }
-                            }); // yes i want to book button
+                            }); // yes i want to book a flight button
                         }
-                    }); // exit button
-
-
-
-//
-//                    //eighth frame
-//                    JOptionPane.showMessageDialog(null, "Thank you for using the " +
-//                                    "Purdue University Airline Management System!", "Thank You!",
-//                            JOptionPane.PLAIN_MESSAGE);
+                    }); //book a flight button
                 }
-            });
+            }); //EDT
         } catch (IOException e) {
             e.printStackTrace();
         }
