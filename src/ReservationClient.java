@@ -96,7 +96,7 @@ public final class ReservationClient {
                 public void run() {
 
                     JFrame frame = new JFrame("Purdue University Flight Reservation System");
-                    frame.setSize(600, 600);
+                    frame.setSize(600,600);
                     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     frame.setResizable(true);
                     frame.setLocationRelativeTo(null);
@@ -129,7 +129,7 @@ public final class ReservationClient {
                     exitButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            
+
                             //eighth frame
                             JOptionPane.showMessageDialog(null, "Thank you for using the " +
                                             "Purdue University Airline Management System!", "Thank You!",
@@ -137,7 +137,7 @@ public final class ReservationClient {
                             frame.dispose();
                         }
                     }); //exit button
-                    
+
                     bookAFlightButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -145,9 +145,9 @@ public final class ReservationClient {
                             panel1.removeAll();
                             panel2.removeAll();
                             panel3.removeAll();
-                            frame.remove(panel1);
-                            frame.remove(panel2);
-                            frame.remove(panel3);
+//                            frame.remove(panel1);
+//                            frame.remove(panel2);
+//                            frame.remove(panel3);
 
                             //second frame
                             JLabel secondText = new JLabel("Do you want to book a flight today?");
@@ -171,9 +171,9 @@ public final class ReservationClient {
                                     panel1.removeAll();
                                     panel2.removeAll();
                                     panel3.removeAll();
-                                    frame.remove(panel1);
-                                    frame.remove(panel2);
-                                    frame.remove(panel3);
+//                                    frame.remove(panel1);
+//                                    frame.remove(panel2);
+//                                    frame.remove(panel3);
 
                                     //third frame (changes based on what is clicked in drop down box??? - panel 2)
                                     frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -215,7 +215,7 @@ public final class ReservationClient {
                                             }
                                             panel3.add(message);
                                         }
-                                    });//DOES NOT WORK (PRINTING AIRLINE MESSAGE)
+                                    });//DOES NOT WORK (PRINTING AIRLINE MESSAGE) need to use an item listener!!
 
 
                                     JPanel panel4 = new JPanel();
@@ -238,10 +238,10 @@ public final class ReservationClient {
                                             panel2.removeAll();
                                             panel3.removeAll();
                                             panel4.removeAll();
-                                            frame.remove(panel1);
-                                            frame.remove(panel2);
-                                            frame.remove(panel3);
-                                            frame.remove(panel4);
+//                                            frame.remove(panel1);
+//                                            frame.remove(panel2);
+//                                            frame.remove(panel3);
+//                                            frame.remove(panel4);
 
                                             //fourth frame
                                             frame.setLayout(new BorderLayout());
@@ -271,7 +271,7 @@ public final class ReservationClient {
                                                     panel1.removeAll();
                                                     panel3.removeAll();
                                                     frame.remove(panel1);
-                                                    
+
                                                     //fifth frame
                                                     frame.setLayout(new BoxLayout(frame.getContentPane(),
                                                             BoxLayout.Y_AXIS));
@@ -302,7 +302,7 @@ public final class ReservationClient {
 //                                                                panel3.add(label);
 //                                                            }
 //                                                        }
-//                                                    }); 
+//                                                    });
 
 
                                                     JLabel lastNameText = new JLabel("What is your last name?");
@@ -329,12 +329,13 @@ public final class ReservationClient {
                                                     frame.add(panel8);
                                                     frame.pack();
                                                     frame.setVisible(true);
+                                                    //put words and textbox on same panel!! so we only use 3 or maybe 4
 
 
                                                     nextButton.addActionListener(new ActionListener() {
                                                         @Override
                                                         public void actionPerformed(ActionEvent e) {
-                                                            
+
                                                             //sixth frame
                                                             String confirmMessage = "Are all the details you" +
                                                                     " entered correct?" + "\n" +
@@ -358,14 +359,14 @@ public final class ReservationClient {
                                                                 panel6.removeAll();
                                                                 panel7.removeAll();
                                                                 panel8.removeAll();
-                                                                frame.remove(panel1);
-                                                                frame.remove(panel2);
-                                                                frame.remove(panel3);
-                                                                frame.remove(panel4);
-                                                                frame.remove(panel5);
-                                                                frame.remove(panel6);
-                                                                frame.remove(panel7);
-                                                                frame.remove(panel8);
+//                                                                frame.remove(panel1);
+//                                                                frame.remove(panel2);
+//                                                                frame.remove(panel3);
+//                                                                frame.remove(panel4);
+//                                                                frame.remove(panel5);
+//                                                                frame.remove(panel6);
+//                                                                frame.remove(panel7);
+//                                                                frame.remove(panel8);
 
                                                                 //seventh frame
                                                                 BoardingPass boardingPass = null;
@@ -399,7 +400,7 @@ public final class ReservationClient {
                                                                 JScrollPane scrollPane1 = new JScrollPane(panel2);
                                                                 //somehow get the arraylist in the scroll pane??
                                                                 //somehow get number of passengers (on scrollpane???)
-                                                                
+
                                                                 JLabel printBP = new JLabel(boardingPass.
                                                                         writeBoardingPass());
                                                                 panel3.add(printBP);
@@ -424,15 +425,15 @@ public final class ReservationClient {
                                                     }); // next button
                                                 }
                                             }); // yes i want this flight button
-                                            
+
                                             noIWantADifferentFlightButton.addActionListener(new ActionListener() {
                                                 @Override
                                                 public void actionPerformed(ActionEvent e) {
                                                     frame.setVisible(false);
                                                     panel1.removeAll();
                                                     panel3.removeAll();
-                                                    frame.remove(panel1);
-                                                    frame.remove(panel3);
+//                                                    frame.remove(panel1);
+//                                                    frame.remove(panel3);
 
                                                     //back to third frame
 
