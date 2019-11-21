@@ -1,4 +1,4 @@
-mport java.io.*;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Objects;
@@ -19,9 +19,10 @@ public final class ReservationServer {
     private Alaska alaska = new Alaska();
     private Gate gate = new Gate();
     private Passenger passenger = new Passenger();
-    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, delta);
-    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, alaska);
-    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, southwest);
+    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, "Delta");
+    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, "Alaska");
+    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, "Southwest");
+
     /**
      * The server socket of this server.
      */
@@ -128,6 +129,25 @@ public final class ReservationServer {
 
         return String.format(format, this.serverSocket);
     } //toString
+
+    /**
+     * Creates a CountdownServer instance, then begins to serve clients.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        ReservationServer server;
+
+        try {
+            server = new ReservationServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            return;
+        }
+
+        server.serveClients();
+    } //main
 }
 
 class ClientHandler implements Runnable {
@@ -239,3 +259,16 @@ class ClientHandler implements Runnable {
         return String.format(format, this.clientSocket);
     } //toString
 }
+
+//add the reservations.txt
+
+//printwriter and printreader
+
+
+//reservationserver
+//edit serveClients
+
+//clienthandler
+//edit run method
+
+//putting run method in server?? main method???
