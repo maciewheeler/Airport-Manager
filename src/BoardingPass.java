@@ -10,24 +10,24 @@ import java.io.Serializable;
 public class BoardingPass implements Serializable {
 
     private Passenger passenger;
-    private Airline airline;
+    private String airline;
     private Gate gate;
     private String gateToString;
     private String airlineName;
-    
-    public BoardingPass(Passenger p, Airline a) {
+
+    public BoardingPass(Passenger p, String a) {
         this.passenger = p;
         this.airline = a;
-        
-        if (airline instanceof Delta) {
+
+        if (airline.equals("Delta")) {
             this.gate = Delta.getDeltaGate();
             this.gateToString = Delta.getDeltaGateString();
             this.airlineName = Delta.getNameOfAirline();
-        } else if (airline instanceof Southwest) {
+        } else if (airline.equals("Southwest")) {
             this.gate = Southwest.getSouthwestGate();
             this.gateToString = Southwest.getSouthwestGateToString();
             this.airlineName = Southwest.getNameOfAirline();
-        } else if (airline instanceof Alaska) {
+        } else if (airline.equals("Alaska")) {
             this.gate = Alaska.getAlaskaGate();
             this.gateToString = Alaska.getAlaskaGateToString();
             this.airlineName = Alaska.getNameOfAirline();
