@@ -12,8 +12,6 @@ public interface Airline extends Serializable {
     int passengerMax = 100;
     int flightNumber = 18000;
 
-    void addPassenger(Passenger passenger);
-
     int getCurrentPassengerCount();
 
     int getMaxPassenger();
@@ -23,14 +21,9 @@ public interface Airline extends Serializable {
     int getAvailableSeats();
 
 }
-//gates printing differently
-//spacing of lines
-//airline messages combobox
+
 //if the button had to go back a frame
 //scroll pane
 //refresh flight status
-//text boxes not working
 //back slash
 //server client
-
-//passenger list stored in this class???
