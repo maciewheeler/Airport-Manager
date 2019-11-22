@@ -319,20 +319,24 @@ public final class ReservationClient {
                                                                 panel4.removeAll();
                                                                 panel5.removeAll();
 
+                                                                Passenger passenger = new Passenger();
+                                                                passenger.setAge(Integer.valueOf(age));
+                                                                passenger.setFirstName(firstName);
+                                                                passenger.setLastName(lastName);
                                                                 //seventh frame
                                                                 BoardingPass boardingPass = null;
                                                                 String selectedGate = "";
-                                                                Passenger test = new Passenger();
+
                                                                 if (selectedAirline.equals("Delta")) {
                                                                     selectedGate = Delta.getDeltaGateString();
-                                                                    boardingPass = new BoardingPass(test, "Delta");
+                                                                    boardingPass = new BoardingPass(passenger, "Delta");
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
-                                                                    boardingPass = new BoardingPass(test,
+                                                                    boardingPass = new BoardingPass(passenger,
                                                                             "Southwest");
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
-                                                                    boardingPass = new BoardingPass(test, "Alaska");
+                                                                    boardingPass = new BoardingPass(passenger, "Alaska");
                                                                 }
                                                                 JLabel seventhText = new JLabel("Flight data" +
                                                                         " displaying for " + selectedAirline +
