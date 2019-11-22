@@ -96,22 +96,22 @@ public final class ReservationClient {
                 public void run() {
 
                     JFrame frame = new JFrame("Purdue University Flight Reservation System");
-                    frame.setSize(600,600);
+                    frame.setSize(800,600);
                     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     frame.setResizable(true);
                     frame.setLocationRelativeTo(null);
 
                     //first frame
                     JPanel panel1 = new JPanel();
-                    JLabel openingText = new JLabel("Welcome to the Purdue University Airline Reservation" +
-                            "\n" + "Management System!");
+                    JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
+                            " Airline Reservation" + "<br>" + "Management System!<html><center>");
                     openingText.setFont(new Font("Courier", Font.BOLD, 24));
                     panel1.add(openingText, BorderLayout.CENTER);
 
                     JPanel panel2 = new JPanel();
                     JLabel imageLabel = new JLabel();
                     ImageIcon purdueImage = new ImageIcon(new ImageIcon("logo.jpg").getImage().
-                            getScaledInstance(221, 270, Image.SCALE_DEFAULT));
+                            getScaledInstance(442, 540, Image.SCALE_DEFAULT));
                     imageLabel.setIcon(purdueImage);
                     panel2.add(imageLabel);
 
@@ -154,11 +154,7 @@ public final class ReservationClient {
                             JButton yesIWantToBookAFlightButton = new JButton("Yes, I want to book a flight.");
                             panel3.add(exitButton);
                             panel3.add(yesIWantToBookAFlightButton);
-
-//                            frame.add(panel1, BorderLayout.NORTH);
-//                            frame.add(panel2, BorderLayout.CENTER);
-//                            frame.add(panel3, BorderLayout.SOUTH);
-//                            frame.pack();
+                            
                             frame.setVisible(true);
 
                             yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
@@ -169,7 +165,6 @@ public final class ReservationClient {
                                     panel2.removeAll();
                                     panel3.removeAll();
 
-                                    //third frame (changes based on what is clicked in drop down box??? - panel 2)
                                     frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
                                     JLabel thirdText = new JLabel("Choose a flight from the drop down menu.");
@@ -206,10 +201,6 @@ public final class ReservationClient {
                                     panel3.add(exitButton);
                                     panel3.add(chooseThisFlightButton);
 
-//                                    frame.add(panel1);
-//                                    frame.add(panel2);
-//                                    frame.add(panel3);
-//                                    frame.pack();
                                     frame.setVisible(true);
 
                                     chooseThisFlightButton.addActionListener(new ActionListener() {
@@ -223,25 +214,23 @@ public final class ReservationClient {
                                             //fourth frame
                                             frame.setLayout(new BorderLayout());
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
-                                            JLabel fourthText = new JLabel("Are you sure that you want to" +
-                                                    " book a flight on " + selectedAirline + " Airlines?");
+                                            JLabel fourthText = new JLabel("<html><center>Are you sure that" +
+                                                    " you want to book a flight on " + selectedAirline +
+                                                    " Airlines?<html><center>");
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
                                             JButton noIWantADifferentFlightButton = new JButton("No, I want a" +
                                                     " different flight.");
-                                            JButton yesIWantthisFlightButton = new JButton("Yes, I want this" +
+                                            JButton yesIWantThisFlightButton = new JButton("Yes, I want this" +
                                                     " flight.");
                                             panel3.add(exitButton);
                                             panel3.add(noIWantADifferentFlightButton);
-                                            panel3.add(yesIWantthisFlightButton);
-
-//                                            frame.add(panel1, BorderLayout.NORTH);
-//                                            frame.add(panel3, BorderLayout.SOUTH);
-//                                            frame.pack();
+                                            panel3.add(yesIWantThisFlightButton);
+                                            
                                             frame.setVisible(true);
 
-                                            yesIWantthisFlightButton.addActionListener(new ActionListener() {
+                                            yesIWantThisFlightButton.addActionListener(new ActionListener() {
                                                 @Override
                                                 public void actionPerformed(ActionEvent e) {
                                                     frame.setVisible(false);
@@ -281,16 +270,9 @@ public final class ReservationClient {
                                                     panel5.add(exitButton);
                                                     panel5.add(nextButton);
 
-//                                                    frame.add(panel1);
-//                                                    frame.add(panel2);
-//                                                    frame.add(panel3);
                                                     frame.add(panel4);
                                                     frame.add(panel5);
-                                                   // frame.pack();
                                                     frame.setVisible(true);
-                                                    //put words and textbox on same panel!! so we only use 3 or maybe 4
-
-
 
                                                     nextButton.addActionListener(new ActionListener() {
                                                         @Override
@@ -309,7 +291,8 @@ public final class ReservationClient {
                                                                     "button below, otherwise, select the No button.";
                                                             int confirm = JOptionPane.showConfirmDialog
                                                                     (null, confirmMessage,
-                                                                            "Confirm Info", JOptionPane.YES_NO_OPTION);
+                                                                            "Confirm Info",
+                                                                            JOptionPane.YES_NO_OPTION);
 
                                                             if (confirm == JOptionPane.YES_OPTION) {
                                                                 frame.setVisible(false);
@@ -330,14 +313,16 @@ public final class ReservationClient {
 
                                                                 if (selectedAirline.equals("Delta")) {
                                                                     selectedGate = Delta.getDeltaGateString();
-                                                                    boardingPass = new BoardingPass(passenger, "Delta");
+                                                                    boardingPass = new BoardingPass(passenger,
+                                                                            "Delta");
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
                                                                     boardingPass = new BoardingPass(passenger,
                                                                             "Southwest");
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
-                                                                    boardingPass = new BoardingPass(passenger, "Alaska");
+                                                                    boardingPass = new BoardingPass(passenger,
+                                                                            "Alaska");
                                                                 }
                                                                 JLabel seventhText = new JLabel("Flight data" +
                                                                         " displaying for " + selectedAirline +
@@ -365,11 +350,6 @@ public final class ReservationClient {
                                                                 panel4.add(exitButton);
                                                                 panel4.add(refreshFlightStatusButton);
 
-//                                                                frame.add(panel1);
-//                                                                frame.add(panel2);
-//                                                                frame.add(panel3);
-//                                                                frame.add(panel4);
-//                                                                frame.pack();
                                                                 frame.setVisible(true);
                                                             } else if (confirm == JOptionPane.NO_OPTION) {
                                                                 //back to fifth frame
@@ -410,9 +390,6 @@ class ResponseListener implements ActionListener {
 
     }
 }
-
-
-//panel.remove()
 
 //how to store whether a button was pressed or not??
 
