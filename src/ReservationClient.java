@@ -215,7 +215,7 @@ public final class ReservationClient {
                                             frame.setLayout(new BorderLayout());
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
                                             JLabel fourthText = new JLabel("<html><center>Are you sure that" +
-                                                    " you want to book a flight on " + selectedAirline +
+                                                    " you want to book a flight on " + "<br>" + selectedAirline +
                                                     " Airlines?</center></html>");
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
@@ -324,12 +324,12 @@ public final class ReservationClient {
                                                                     boardingPass = new BoardingPass(passenger,
                                                                             "Alaska");
                                                                 }
-                                                                JLabel seventhText = new JLabel("Flight data" +
-                                                                        " displaying for " + selectedAirline +
-                                                                        " Airlines" +
-                                                                        "\n" + "Enjoy your flight!" + "\n" +
+                                                                JLabel seventhText = new JLabel("<html><center>" +
+                                                                        "Flight data displaying for " +
+                                                                        selectedAirline + " Airlines." +
+                                                                        "<br>" + "Enjoy your flight!" + "<br>" +
                                                                         "Flight is now boarding at Gate "
-                                                                        + selectedGate);
+                                                                        + selectedGate + "</center></html>");
                                                                 seventhText.setFont(new Font("Courier",
                                                                         Font.BOLD, 24));
                                                                 panel1.add(seventhText);
