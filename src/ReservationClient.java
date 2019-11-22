@@ -310,8 +310,8 @@ public final class ReservationClient {
 
                                                                 Passenger passenger = new Passenger();
                                                                 passenger.setAge(Integer.valueOf(age));
-                                                                passenger.setFirstName(firstName);
-                                                                passenger.setLastName(lastName);
+                                                                passenger.setFirstName(firstName.toUpperCase());
+                                                                passenger.setLastName(lastName.toUpperCase());
                                                                 //seventh frame
                                                                 BoardingPass boardingPass = null;
                                                                 String selectedGate = "";
