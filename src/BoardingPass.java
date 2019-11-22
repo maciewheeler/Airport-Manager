@@ -41,6 +41,9 @@ public class BoardingPass implements Serializable {
         }
 
     }
+    public void setGate(String s) {
+        this.gateToString = s;
+    }
 
 
     public String writeBoardingPass() {
