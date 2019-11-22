@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
+import java.rmi.activation.ActivationInstantiator;
 
 /**
  * A client used to connect to a ReservationServer instance.
@@ -197,6 +198,11 @@ public final class ReservationClient {
                                         }
                                     });
 
+//                                    KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
+                                    int backslashKeyCode = KeyEvent.VK_BACK_SLASH;
+                                    setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
+                                            openNewWindow);
+
                                     JButton chooseThisFlightButton = new JButton("Choose this flight");
                                     panel3.add(exitButton);
                                     panel3.add(chooseThisFlightButton);
@@ -385,6 +391,53 @@ public final class ReservationClient {
             e.printStackTrace();
         }
     } //main
+
+    private static void setKeyBindings(Container comp, int keyCode, String id, ActionListener actionListener) {
+        JPanel jp = (JPanel) comp;
+        InputMap inMap = jp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap aMap = jp.getActionMap();
+        KeyStroke ks = KeyStroke.getKeyStroke(keyCode, 0, true);
+        inMap.put(ks, id);
+        AbstractAction abstractAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                actionListener.actionPerformed(actionEvent);
+            }
+        };
+        aMap.put(id, abstractAction);
+    }
+
+    private static void resetKeyBindings(KeyStroke ks, Container comp) {
+        JPanel cp = ((JPanel) comp);
+        ActionMap aMap = cp.getActionMap();
+        InputMap inMap = cp.getInputMap();
+        inMap.put(ks, null);
+        aMap.put(ks, null);
+    }
+
+    public static Action openNewWindow = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFrame littleFrame = new JFrame();
+            littleFrame.setSize(100, 100);
+            littleFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            littleFrame.setResizable(true);
+
+            JPanel panel1 = new JPanel();
+            JPanel panel2 = new JPanel();
+            JPanel panel3 = new JPanel();
+
+            JLabel airlineName = new JLabel();
+
+            JScrollPane sp = new JScrollPane();
+
+            JButton exitButton = new JButton("Exit");
+            panel3.add(exitButton);
+
+            littleFrame.add(panel3);
+            littleFrame.setVisible(true);
+        }
+    };
 }
 
 class ResponseListener implements ActionListener {
@@ -404,3 +457,24 @@ class ResponseListener implements ActionListener {
 //why is new Runnable gray??
 
 //what is the responselistener class for??
+
+//how to store whether a button was pressed or not??
+
+//make frame pop up on center of screen
+//for first frame how to center text???
+//figure out how to make background all white
+//how to make sure jframe is always the same size each time??
+
+//why is new Runnable gray??
+
+//what is the responselistener class for??
+
+
+
+//drop down box possibly move to another panel???
+
+//KeyEvent.VK_Backslash
+//comp = frame.getContentPane();
+//id is openNewWindow
+
+//resetKeyBindings(backslash, frame.getContentPane());
