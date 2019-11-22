@@ -8,15 +8,15 @@ import java.util.ArrayList;
  */
 public class Alaska implements Airline {
 
-    private ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
-    private static Gate alaskaGate = new Gate();
+    private static ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
+    private final static Gate alaskaGate = new Gate();
     private static String nameOfAirline = "Alaska Airlines";
 
-    public void addPassenger(Passenger passenger) {
+    public static void addPassenger(Passenger passenger) {
         alaskaPassengers.add(passenger);
     }
 
-    public ArrayList<Passenger> getAlaskaPassengers() {
+    public static ArrayList<Passenger> getAlaskaPassengers() {
         return alaskaPassengers;
     }
 
@@ -40,10 +40,10 @@ public class Alaska implements Airline {
         return nameOfAirline;
     }
 
-    public static String getAlaskaGateToString() {
+    public final static String getAlaskaGateToString() {
         return alaskaGate.getGate();
     }
-    public static Gate getAlaskaGate() {
+    public final static Gate getAlaskaGate() {
         return alaskaGate;
     }
 
