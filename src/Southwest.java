@@ -48,10 +48,10 @@ public class Southwest implements Airline {
     }
 
     public static String getAirlineMessage() {
-        return "<html><center>Southwest Airlines is proud to offer flights to Purdue University." + "\n" +
-                "We are happy to offer free inflight WiFi, as well as our amazing snacks." + "\n" +
+        return "<html><center>Southwest Airlines is proud to offer flights to Purdue University." + "<br>" +
+                "We are happy to offer free inflight WiFi, as well as our amazing snacks." + "<br>" +
                 "In addition, we offer flights for much cheaper than other airlines, and offer two free checked" +
-                " bags." + "\n" +
+                " bags." + "<br>" +
                 "We hope you choose Southwest for your next flight.</center></html>";
     }
 }
