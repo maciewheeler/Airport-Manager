@@ -123,7 +123,7 @@ public final class ReservationClient {
                     frame.add(panel1, BorderLayout.NORTH);
                     frame.add(panel2, BorderLayout.CENTER);
                     frame.add(panel3, BorderLayout.SOUTH);
-                    frame.pack();
+                    //frame.pack();
                     frame.setVisible(true);
 
                     exitButton.addActionListener(new ActionListener() {
@@ -155,10 +155,10 @@ public final class ReservationClient {
                             panel3.add(exitButton);
                             panel3.add(yesIWantToBookAFlightButton);
 
-                            frame.add(panel1, BorderLayout.NORTH);
-                            frame.add(panel2, BorderLayout.CENTER);
-                            frame.add(panel3, BorderLayout.SOUTH);
-                            frame.pack();
+//                            frame.add(panel1, BorderLayout.NORTH);
+//                            frame.add(panel2, BorderLayout.CENTER);
+//                            frame.add(panel3, BorderLayout.SOUTH);
+//                            frame.pack();
                             frame.setVisible(true);
 
                             yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
@@ -206,10 +206,10 @@ public final class ReservationClient {
                                     panel3.add(exitButton);
                                     panel3.add(chooseThisFlightButton);
 
-                                    frame.add(panel1);
-                                    frame.add(panel2);
-                                    frame.add(panel3);
-                                    frame.pack();
+//                                    frame.add(panel1);
+//                                    frame.add(panel2);
+//                                    frame.add(panel3);
+//                                    frame.pack();
                                     frame.setVisible(true);
 
                                     chooseThisFlightButton.addActionListener(new ActionListener() {
@@ -236,9 +236,9 @@ public final class ReservationClient {
                                             panel3.add(noIWantADifferentFlightButton);
                                             panel3.add(yesIWantthisFlightButton);
 
-                                            frame.add(panel1, BorderLayout.NORTH);
-                                            frame.add(panel3, BorderLayout.SOUTH);
-                                            frame.pack();
+//                                            frame.add(panel1, BorderLayout.NORTH);
+//                                            frame.add(panel3, BorderLayout.SOUTH);
+//                                            frame.pack();
                                             frame.setVisible(true);
 
                                             yesIWantthisFlightButton.addActionListener(new ActionListener() {
@@ -281,12 +281,12 @@ public final class ReservationClient {
                                                     panel5.add(exitButton);
                                                     panel5.add(nextButton);
 
-                                                    frame.add(panel1);
-                                                    frame.add(panel2);
-                                                    frame.add(panel3);
+//                                                    frame.add(panel1);
+//                                                    frame.add(panel2);
+//                                                    frame.add(panel3);
                                                     frame.add(panel4);
                                                     frame.add(panel5);
-                                                    frame.pack();
+                                                   // frame.pack();
                                                     frame.setVisible(true);
                                                     //put words and textbox on same panel!! so we only use 3 or maybe 4
 
@@ -318,6 +318,7 @@ public final class ReservationClient {
                                                                 panel3.removeAll();
                                                                 panel4.removeAll();
                                                                 panel5.removeAll();
+                                                                frame.remove(panel5);
 
                                                                 Passenger passenger = new Passenger();
                                                                 passenger.setAge(Integer.valueOf(age));
@@ -364,11 +365,11 @@ public final class ReservationClient {
                                                                 panel4.add(exitButton);
                                                                 panel4.add(refreshFlightStatusButton);
 
-                                                                frame.add(panel1);
-                                                                frame.add(panel2);
-                                                                frame.add(panel3);
-                                                                frame.add(panel4);
-                                                                frame.pack();
+//                                                                frame.add(panel1);
+//                                                                frame.add(panel2);
+//                                                                frame.add(panel3);
+//                                                                frame.add(panel4);
+//                                                                frame.pack();
                                                                 frame.setVisible(true);
                                                             } else if (confirm == JOptionPane.NO_OPTION) {
                                                                 //back to fifth frame
