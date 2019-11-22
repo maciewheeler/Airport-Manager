@@ -315,14 +315,17 @@ public final class ReservationClient {
                                                                     selectedGate = Delta.getDeltaGateString();
                                                                     boardingPass = new BoardingPass(passenger,
                                                                             "Delta");
+                                                                    boardingPass.setGate(selectedGate);
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
                                                                     boardingPass = new BoardingPass(passenger,
                                                                             "Southwest");
+                                                                    boardingPass.setGate(selectedGate);
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
                                                                     boardingPass = new BoardingPass(passenger,
                                                                             "Alaska");
+                                                                    boardingPass.setGate(selectedGate);
                                                                 }
                                                                 JLabel seventhText = new JLabel("<html><center>" +
                                                                         "Flight data displaying for " +
