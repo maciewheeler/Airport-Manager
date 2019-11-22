@@ -265,10 +265,12 @@ public final class ReservationClient {
                                                     JTextField firstNameTextField = new JTextField(10);
                                                     panel2.add(firstNameTextField);
 
+
                                                     JLabel lastNameText = new JLabel("What is your last name?");
                                                     panel3.add(lastNameText);
                                                     JTextField lastNameTextField = new JTextField(10);
                                                     panel3.add(lastNameTextField);
+
 
                                                     JLabel ageText = new JLabel("What is your age?");
                                                     panel4.add(ageText);
@@ -288,37 +290,26 @@ public final class ReservationClient {
                                                     frame.setVisible(true);
                                                     //put words and textbox on same panel!! so we only use 3 or maybe 4
 
-                                                    //JLabel label = new JLabel();
-//                                                    label.setVisible(false);
-//                                                    firstNameTextField.addKeyListener(new KeyAdapter() {
-//                                                        @Override
-//                                                        public void keyPressed(KeyEvent e) {
-//                                                            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-//                                                                String firstName = firstNameTextField.getText();
-//                                                                label.setText(firstName);
-//                                                                label.setVisible(true);
-//                                                                panel3.add(label);
-//                                                            }
-//                                                        }
-//                                                    });
 
 
                                                     nextButton.addActionListener(new ActionListener() {
                                                         @Override
                                                         public void actionPerformed(ActionEvent e) {
-
+                                                            String firstName  = firstNameTextField.getText();
+                                                            String lastName = lastNameTextField.getText();
+                                                            String age = ageTextField.getText();
                                                             //sixth frame
                                                             String confirmMessage = "Are all the details you" +
                                                                     " entered correct?" + "\n" +
-                                                                    "The passenger's name is (passenger first name" +
-                                                                    " and last name) and their age is" +
-                                                                    " (passenger age)." + "\n" +
+                                                                    "The passenger's name is " + firstName + " " +
+                                                                    lastName + " and their age is " +
+                                                                    age + "." + "\n" +
                                                                     "If all the information shown is correct, select" +
                                                                     " the Yes" + "\n" +
                                                                     "button below, otherwise, select the No button.";
                                                             int confirm = JOptionPane.showConfirmDialog
                                                                     (null, confirmMessage,
-                                                                    "Confirm Info", JOptionPane.YES_NO_OPTION);
+                                                                            "Confirm Info", JOptionPane.YES_NO_OPTION);
 
                                                             if (confirm == JOptionPane.YES_OPTION) {
                                                                 frame.setVisible(false);
@@ -332,9 +323,6 @@ public final class ReservationClient {
                                                                 BoardingPass boardingPass = null;
                                                                 String selectedGate = "";
                                                                 Passenger test = new Passenger();
-                                                                test.setFirstName("keya");
-                                                                test.setLastName("mahtani");
-                                                                test.setAge(18);
                                                                 if (selectedAirline.equals("Delta")) {
                                                                     selectedGate = Delta.getDeltaGateString();
                                                                     boardingPass = new BoardingPass(test, "Delta");
