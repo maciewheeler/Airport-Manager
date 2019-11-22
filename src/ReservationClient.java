@@ -104,7 +104,7 @@ public final class ReservationClient {
                     //first frame
                     JPanel panel1 = new JPanel();
                     JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
-                            " Airline Reservation" + "<br>" + "Management System!<html><center>");
+                            " Airline Reservation" + "<br>" + "Management System!</html></center>");
                     openingText.setFont(new Font("Courier", Font.BOLD, 24));
                     panel1.add(openingText, BorderLayout.CENTER);
 
@@ -154,7 +154,7 @@ public final class ReservationClient {
                             JButton yesIWantToBookAFlightButton = new JButton("Yes, I want to book a flight.");
                             panel3.add(exitButton);
                             panel3.add(yesIWantToBookAFlightButton);
-                            
+
                             frame.setVisible(true);
 
                             yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
@@ -216,7 +216,7 @@ public final class ReservationClient {
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
                                             JLabel fourthText = new JLabel("<html><center>Are you sure that" +
                                                     " you want to book a flight on " + selectedAirline +
-                                                    " Airlines?<html><center>");
+                                                    " Airlines?</html></center>");
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
@@ -227,7 +227,7 @@ public final class ReservationClient {
                                             panel3.add(exitButton);
                                             panel3.add(noIWantADifferentFlightButton);
                                             panel3.add(yesIWantThisFlightButton);
-                                            
+
                                             frame.setVisible(true);
 
                                             yesIWantThisFlightButton.addActionListener(new ActionListener() {
