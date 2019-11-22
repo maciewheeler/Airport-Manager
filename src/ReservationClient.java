@@ -104,7 +104,7 @@ public final class ReservationClient {
                     //first frame
                     JPanel panel1 = new JPanel();
                     JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
-                            " Airline Reservation" + "<br>" + "Management System!</html></center>");
+                            " Airline Reservation" + "<br>" + "Management System!</center></html>");
                     openingText.setFont(new Font("Courier", Font.BOLD, 24));
                     panel1.add(openingText, BorderLayout.CENTER);
 
@@ -216,7 +216,7 @@ public final class ReservationClient {
                                             String selectedAirline = (String) airlineNames.getSelectedItem();
                                             JLabel fourthText = new JLabel("<html><center>Are you sure that" +
                                                     " you want to book a flight on " + selectedAirline +
-                                                    " Airlines?</html></center>");
+                                                    " Airlines?</center></html>");
                                             fourthText.setFont(new Font("Courier", Font.BOLD, 24));
                                             panel1.add(fourthText);
 
