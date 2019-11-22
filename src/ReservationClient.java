@@ -145,9 +145,6 @@ public final class ReservationClient {
                             panel1.removeAll();
                             panel2.removeAll();
                             panel3.removeAll();
-//                            frame.remove(panel1);
-//                            frame.remove(panel2);
-//                            frame.remove(panel3);
 
                             //second frame
                             JLabel secondText = new JLabel("Do you want to book a flight today?");
@@ -171,9 +168,6 @@ public final class ReservationClient {
                                     panel1.removeAll();
                                     panel2.removeAll();
                                     panel3.removeAll();
-//                                    frame.remove(panel1);
-//                                    frame.remove(panel2);
-//                                    frame.remove(panel3);
 
                                     //third frame (changes based on what is clicked in drop down box??? - panel 2)
                                     frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -186,47 +180,35 @@ public final class ReservationClient {
                                     airlineNames.addItem("Delta");
                                     airlineNames.addItem("Southwest");
                                     airlineNames.addItem("Alaska");
-                                    panel2.add(airlineNames);
+                                    panel1.add(airlineNames);
 
-//                                    String selectedAirline = airlineNames.getSelectedItem().toString();
-//                                    JLabel message = new JLabel();
-//                                    if (selectedAirline.equals("Delta")) {
-//                                        message.setText(Delta.getAirlineMessage());
-//                                    }
-//                                    if (selectedAirline.equals("Southwest")) {
-//                                       message.setText(Southwest.getAirlineMessage());
-//                                    }
-//                                    if (selectedAirline.equals("Alaska")) {
-//                                        message.setText(Alaska.getAirlineMessage());
-//                                    }
+                                    JLabel message = new JLabel();
+                                    message.setText(Delta.getAirlineMessage());
+                                    panel2.add(message);
 
-                                    airlineNames.addItemListener(new ItemListener() {
-                                        @Override
-                                        public void itemStateChanged(ItemEvent itemEvent) {
-//                                            JComboBox getSelection = (JComboBox) itemEvent.getSource();
-                                            String selectedAirline = (String) airlineNames.getSelectedItem();
-                                            JLabel message = new JLabel();
-                                            if (selectedAirline.equals("Delta")) {
-                                                message.setText(Delta.getAirlineMessage());
-                                            } else if (selectedAirline.equals("Southwest")) {
-                                                message.setText(Southwest.getAirlineMessage());
-                                            } else if (selectedAirline.equals("Alaska")) {
-                                                message.setText(Alaska.getAirlineMessage());
-                                            }
-                                            panel3.add(message);
+                                    airlineNames.addItemListener(listener -> {
+                                        String choice;
+                                        JComboBox getSelection = (JComboBox) listener.getSource();
+                                        choice = (String) getSelection.getSelectedItem();
+                                        if (choice.equals("Delta")) {
+                                            message.setText(Delta.getAirlineMessage());
+                                            panel2.add(message);
+                                        } else if (choice.equals("Southwest")) {
+                                            message.setText(Southwest.getAirlineMessage());
+                                            panel2.add(message);
+                                        } else if (choice.equals("Alaska")) {
+                                            message.setText(Alaska.getAirlineMessage());
+                                            panel2.add(message);
                                         }
-                                    });//DOES NOT WORK (PRINTING AIRLINE MESSAGE) need to use an item listener!!
+                                    });
 
-
-                                    JPanel panel4 = new JPanel();
                                     JButton chooseThisFlightButton = new JButton("Choose this flight");
-                                    panel4.add(exitButton);
-                                    panel4.add(chooseThisFlightButton);
+                                    panel3.add(exitButton);
+                                    panel3.add(chooseThisFlightButton);
 
                                     frame.add(panel1);
                                     frame.add(panel2);
                                     frame.add(panel3);
-                                    frame.add(panel4);
                                     frame.pack();
                                     frame.setVisible(true);
 
@@ -237,11 +219,6 @@ public final class ReservationClient {
                                             panel1.removeAll();
                                             panel2.removeAll();
                                             panel3.removeAll();
-                                            panel4.removeAll();
-//                                            frame.remove(panel1);
-//                                            frame.remove(panel2);
-//                                            frame.remove(panel3);
-//                                            frame.remove(panel4);
 
                                             //fourth frame
                                             frame.setLayout(new BorderLayout());
@@ -270,16 +247,13 @@ public final class ReservationClient {
                                                     frame.setVisible(false);
                                                     panel1.removeAll();
                                                     panel3.removeAll();
-                                                    frame.remove(panel1);
 
                                                     //fifth frame
                                                     frame.setLayout(new BoxLayout(frame.getContentPane(),
                                                             BoxLayout.Y_AXIS));
 
+                                                    JPanel panel4 = new JPanel();
                                                     JPanel panel5 = new JPanel();
-                                                    JPanel panel6 = new JPanel();
-                                                    JPanel panel7 = new JPanel();
-                                                    JPanel panel8 = new JPanel();
 
                                                     JLabel fifthText = new JLabel("Please input your" +
                                                             " information below.");
@@ -288,9 +262,33 @@ public final class ReservationClient {
 
                                                     JLabel firstNameText = new JLabel("What is your first name?");
                                                     panel2.add(firstNameText);
-                                                    JTextField firstNameTextField = new JTextField();
-                                                    panel3.add(firstNameTextField);
-//                                                    JLabel label = new JLabel();
+                                                    JTextField firstNameTextField = new JTextField(10);
+                                                    panel2.add(firstNameTextField);
+
+                                                    JLabel lastNameText = new JLabel("What is your last name?");
+                                                    panel3.add(lastNameText);
+                                                    JTextField lastNameTextField = new JTextField(10);
+                                                    panel3.add(lastNameTextField);
+
+                                                    JLabel ageText = new JLabel("What is your age?");
+                                                    panel4.add(ageText);
+                                                    JTextField ageTextField = new JTextField(10);
+                                                    panel4.add(ageTextField);
+
+                                                    JButton nextButton = new JButton("Next");
+                                                    panel5.add(exitButton);
+                                                    panel5.add(nextButton);
+
+                                                    frame.add(panel1);
+                                                    frame.add(panel2);
+                                                    frame.add(panel3);
+                                                    frame.add(panel4);
+                                                    frame.add(panel5);
+                                                    frame.pack();
+                                                    frame.setVisible(true);
+                                                    //put words and textbox on same panel!! so we only use 3 or maybe 4
+
+                                                    //JLabel label = new JLabel();
 //                                                    label.setVisible(false);
 //                                                    firstNameTextField.addKeyListener(new KeyAdapter() {
 //                                                        @Override
@@ -303,33 +301,6 @@ public final class ReservationClient {
 //                                                            }
 //                                                        }
 //                                                    });
-
-
-                                                    JLabel lastNameText = new JLabel("What is your last name?");
-                                                    panel4.add(lastNameText);
-                                                    JTextField lastNameTextField = new JTextField();
-                                                    panel5.add(lastNameTextField);
-
-                                                    JLabel ageText = new JLabel("What is your age?");
-                                                    panel6.add(ageText);
-                                                    JTextField ageTextField = new JTextField();
-                                                    panel7.add(ageTextField);
-
-                                                    JButton nextButton = new JButton("Next");
-                                                    panel8.add(exitButton);
-                                                    panel8.add(nextButton);
-
-                                                    frame.add(panel1);
-                                                    frame.add(panel2);
-                                                    frame.add(panel3);
-                                                    frame.add(panel4);
-                                                    frame.add(panel5);
-                                                    frame.add(panel6);
-                                                    frame.add(panel7);
-                                                    frame.add(panel8);
-                                                    frame.pack();
-                                                    frame.setVisible(true);
-                                                    //put words and textbox on same panel!! so we only use 3 or maybe 4
 
 
                                                     nextButton.addActionListener(new ActionListener() {
@@ -356,35 +327,24 @@ public final class ReservationClient {
                                                                 panel3.removeAll();
                                                                 panel4.removeAll();
                                                                 panel5.removeAll();
-                                                                panel6.removeAll();
-                                                                panel7.removeAll();
-                                                                panel8.removeAll();
-//                                                                frame.remove(panel1);
-//                                                                frame.remove(panel2);
-//                                                                frame.remove(panel3);
-//                                                                frame.remove(panel4);
-//                                                                frame.remove(panel5);
-//                                                                frame.remove(panel6);
-//                                                                frame.remove(panel7);
-//                                                                frame.remove(panel8);
 
                                                                 //seventh frame
                                                                 BoardingPass boardingPass = null;
                                                                 String selectedGate = "";
-//                                                                Passenger test = new Passenger();
-//                                                                test.setFirstName("keya");
-//                                                                test.setLastName("mahtani");
-//                                                                test.setAge(18);
+                                                                Passenger test = new Passenger();
+                                                                test.setFirstName("keya");
+                                                                test.setLastName("mahtani");
+                                                                test.setAge(18);
                                                                 if (selectedAirline.equals("Delta")) {
                                                                     selectedGate = Delta.getDeltaGateString();
-                                                                    boardingPass = new BoardingPass(, "Delta");
+                                                                    boardingPass = new BoardingPass(test, "Delta");
                                                                 } else if (selectedAirline.equals("Southwest")) {
                                                                     selectedGate = Southwest.getSouthwestGateToString();
-                                                                    boardingPass = new BoardingPass(,
+                                                                    boardingPass = new BoardingPass(test,
                                                                             "Southwest");
                                                                 } else if (selectedAirline.equals("Alaska")) {
                                                                     selectedGate = Alaska.getAlaskaGateToString();
-                                                                    boardingPass = new BoardingPass(, "Alaska");
+                                                                    boardingPass = new BoardingPass(test, "Alaska");
                                                                 }
                                                                 JLabel seventhText = new JLabel("Flight data" +
                                                                         " displaying for " + selectedAirline +
@@ -432,8 +392,6 @@ public final class ReservationClient {
                                                     frame.setVisible(false);
                                                     panel1.removeAll();
                                                     panel3.removeAll();
-//                                                    frame.remove(panel1);
-//                                                    frame.remove(panel3);
 
                                                     //back to third frame
 
