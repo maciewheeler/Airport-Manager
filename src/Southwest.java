@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class Southwest implements Airline {
 
-    private ArrayList<Passenger> southwestPassengers = new ArrayList<>();
-    private static Gate southwestGate = new Gate();
+    private static ArrayList<Passenger> southwestPassengers = new ArrayList<>();
+    private final static Gate southwestGate = new Gate();
     private static String nameOfAirline = "Southwest Airlines";
 
-    public void addPassenger(Passenger passenger) {
+    public static void addPassenger(Passenger passenger) {
         southwestPassengers.add(passenger);
     }
 
@@ -40,10 +40,10 @@ public class Southwest implements Airline {
         return nameOfAirline;
     }
 
-    public static String getSouthwestGateToString() {
+    public final static String getSouthwestGateToString() {
         return southwestGate.getGate();
     }
-    public static Gate getSouthwestGate() {
+    public final static Gate getSouthwestGate() {
         return southwestGate;
     }
 
