@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class Delta implements Airline {
 
-    private ArrayList<Passenger> deltaPassengers = new ArrayList<>();
-    private static Gate deltaGate = new Gate();
+    private static ArrayList<Passenger> deltaPassengers = new ArrayList<>();
+    private final static Gate deltaGate = new Gate();
     private static String nameOfAirline = "Delta Airlines";
 
-    public void addPassenger(Passenger passenger) {
+    public static void addPassenger(Passenger passenger) {
         deltaPassengers.add(passenger);
     }
 
@@ -40,10 +40,10 @@ public class Delta implements Airline {
         return nameOfAirline;
     }
 
-    public static String getDeltaGateString() {
+    public final static String getDeltaGateString() {
         return deltaGate.getGate();
     }
-    public static Gate getDeltaGate() {
+    public final static Gate getDeltaGate() {
         return deltaGate;
     }
 
