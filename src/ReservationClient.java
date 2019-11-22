@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
-import java.rmi.activation.ActivationInstantiator;
 
 /**
  * A client used to connect to a ReservationServer instance.
@@ -124,7 +123,6 @@ public final class ReservationClient {
                     frame.add(panel1, BorderLayout.NORTH);
                     frame.add(panel2, BorderLayout.CENTER);
                     frame.add(panel3, BorderLayout.SOUTH);
-                    //frame.pack();
                     frame.setVisible(true);
 
                     exitButton.addActionListener(new ActionListener() {
@@ -166,6 +164,7 @@ public final class ReservationClient {
                                     panel2.removeAll();
                                     panel3.removeAll();
 
+                                    //third frame
                                     frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
                                     JLabel thirdText = new JLabel("Choose a flight from the drop down menu.");
@@ -342,7 +341,6 @@ public final class ReservationClient {
                                                                 seventhText.setFont(new Font("Courier",
                                                                         Font.BOLD, 24));
                                                                 panel1.add(seventhText);
-                                                                //try changing gates to final inside each airline class
 
                                                                 JScrollPane scrollPane1 = new JScrollPane(panel2);
                                                                 //somehow get the arraylist in the scroll pane??
@@ -351,8 +349,6 @@ public final class ReservationClient {
                                                                 JLabel printBP = new JLabel(boardingPass.
                                                                         writeBoardingPass());
                                                                 panel3.add(printBP);
-                                                                //fix gate on boarding pass??
-
 
                                                                 JButton refreshFlightStatusButton = new JButton
                                                                         ("Refresh Flight Status");
@@ -361,7 +357,9 @@ public final class ReservationClient {
 
                                                                 frame.setVisible(true);
                                                             } else if (confirm == JOptionPane.NO_OPTION) {
+
                                                                 //back to fifth frame
+                                                                frame.requestFocus();
                                                             }
                                                         }
                                                     }); // next button
@@ -371,12 +369,9 @@ public final class ReservationClient {
                                             noIWantADifferentFlightButton.addActionListener(new ActionListener() {
                                                 @Override
                                                 public void actionPerformed(ActionEvent e) {
-                                                    frame.setVisible(false);
-                                                    panel1.removeAll();
-                                                    panel3.removeAll();
 
                                                     //back to third frame
-
+                                                    //requestFocus???
                                                 }
                                             }); // no i want a different flight button
                                         }
@@ -391,6 +386,54 @@ public final class ReservationClient {
             e.printStackTrace();
         }
     } //main
+
+//    private static void firstFrame(JFrame frame) {
+//        //first frame
+//        JPanel panel1 = new JPanel();
+//        JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
+//                " Airline Reservation" + "<br>" + "Management System!</center></html>");
+//        openingText.setFont(new Font("Courier", Font.BOLD, 24));
+//        panel1.add(openingText, BorderLayout.CENTER);
+//
+//        JPanel panel2 = new JPanel();
+//        JLabel imageLabel = new JLabel();
+//        ImageIcon purdueImage = new ImageIcon(new ImageIcon("logo.jpg").getImage().
+//                getScaledInstance(442, 540, Image.SCALE_DEFAULT));
+//        imageLabel.setIcon(purdueImage);
+//        panel2.add(imageLabel);
+//
+//        JPanel panel3 = new JPanel();
+//        JButton exitButton = new JButton("Exit");
+//        panel3.add(exitButton);
+//        JButton bookAFlightButton = new JButton("Book a Flight");
+//        panel3.add(bookAFlightButton);
+//        frame.add(panel1, BorderLayout.NORTH);
+//        frame.add(panel2, BorderLayout.CENTER);
+//        frame.add(panel3, BorderLayout.SOUTH);
+//        frame.setVisible(true);
+//
+//        exitButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//                //eighth frame
+//                JOptionPane.showMessageDialog(null, "Thank you for using the " +
+//                                "Purdue University Airline Management System!", "Thank You!",
+//                        JOptionPane.PLAIN_MESSAGE);
+//                frame.dispose();
+//            }
+//        }); //exit button
+//
+//        bookAFlightButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                secondFrame
+//            }
+//    });
+//
+//    public static void secondFrame(JFrame frame) {
+//
+//    }
 
     private static void setKeyBindings(Container comp, int keyCode, String id, ActionListener actionListener) {
         JPanel jp = (JPanel) comp;
