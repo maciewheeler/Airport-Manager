@@ -100,289 +100,7 @@ public final class ReservationClient {
                     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     frame.setResizable(true);
                     frame.setLocationRelativeTo(null);
-
-                    //first frame
-                    JPanel panel1 = new JPanel();
-                    JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
-                            " Airline Reservation" + "<br>" + "Management System!</center></html>");
-                    openingText.setFont(new Font("Courier", Font.BOLD, 24));
-                    panel1.add(openingText, BorderLayout.CENTER);
-
-                    JPanel panel2 = new JPanel();
-                    JLabel imageLabel = new JLabel();
-                    ImageIcon purdueImage = new ImageIcon(new ImageIcon("logo.jpg").getImage().
-                            getScaledInstance(442, 540, Image.SCALE_DEFAULT));
-                    imageLabel.setIcon(purdueImage);
-                    panel2.add(imageLabel);
-
-                    JPanel panel3 = new JPanel();
-                    JButton exitButton = new JButton("Exit");
-                    panel3.add(exitButton);
-                    JButton bookAFlightButton = new JButton("Book a Flight");
-                    panel3.add(bookAFlightButton);
-                    frame.add(panel1, BorderLayout.NORTH);
-                    frame.add(panel2, BorderLayout.CENTER);
-                    frame.add(panel3, BorderLayout.SOUTH);
-                    frame.setVisible(true);
-
-                    exitButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-
-                            //eighth frame
-                            JOptionPane.showMessageDialog(null, "Thank you for using the " +
-                                            "Purdue University Airline Management System!", "Thank You!",
-                                    JOptionPane.PLAIN_MESSAGE);
-                            frame.dispose();
-                        }
-                    }); //exit button
-
-                    bookAFlightButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            frame.setVisible(false);
-                            panel1.removeAll();
-                            panel2.removeAll();
-                            panel3.removeAll();
-
-                            //second frame
-                            JLabel secondText = new JLabel("Do you want to book a flight today?");
-                            secondText.setFont(new Font("Courier", Font.BOLD, 24));
-                            panel1.add(secondText);
-
-                            JButton yesIWantToBookAFlightButton = new JButton("Yes, I want to book a flight.");
-                            panel3.add(exitButton);
-                            panel3.add(yesIWantToBookAFlightButton);
-
-                            frame.setVisible(true);
-
-                            yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    frame.setVisible(false);
-                                    panel1.removeAll();
-                                    panel2.removeAll();
-                                    panel3.removeAll();
-
-                                    //third frame
-                                    frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-
-                                    JLabel thirdText = new JLabel("Choose a flight from the drop down menu.");
-                                    thirdText.setFont(new Font("Courier", Font.BOLD, 24));
-                                    panel1.add(thirdText);
-
-                                    JComboBox<String> airlineNames = new JComboBox<>();
-                                    airlineNames.addItem("Delta");
-                                    airlineNames.addItem("Southwest");
-                                    airlineNames.addItem("Alaska");
-                                    panel1.add(airlineNames);
-
-                                    JLabel message = new JLabel();
-                                    message.setText(Delta.getAirlineMessage());
-                                    panel2.add(message);
-
-                                    airlineNames.addItemListener(listener -> {
-                                        String choice;
-                                        JComboBox getSelection = (JComboBox) listener.getSource();
-                                        choice = (String) getSelection.getSelectedItem();
-                                        if (choice.equals("Delta")) {
-                                            message.setText(Delta.getAirlineMessage());
-                                            panel2.add(message);
-                                        } else if (choice.equals("Southwest")) {
-                                            message.setText(Southwest.getAirlineMessage());
-                                            panel2.add(message);
-                                        } else if (choice.equals("Alaska")) {
-                                            message.setText(Alaska.getAirlineMessage());
-                                            panel2.add(message);
-                                        }
-                                    });
-
-//                                    KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
-                                    int backslashKeyCode = KeyEvent.VK_BACK_SLASH;
-                                    setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
-                                            openNewWindow);
-
-                                    JButton chooseThisFlightButton = new JButton("Choose this flight");
-                                    panel3.add(exitButton);
-                                    panel3.add(chooseThisFlightButton);
-
-                                    frame.setVisible(true);
-
-                                    chooseThisFlightButton.addActionListener(new ActionListener() {
-                                        @Override
-                                        public void actionPerformed(ActionEvent e) {
-                                            frame.setVisible(false);
-                                            panel1.removeAll();
-                                            panel2.removeAll();
-                                            panel3.removeAll();
-
-                                            //fourth frame
-                                            frame.setLayout(new BorderLayout());
-                                            String selectedAirline = (String) airlineNames.getSelectedItem();
-                                            JLabel fourthText = new JLabel("<html><center>Are you sure that" +
-                                                    " you want to book a flight on " + "<br>" + selectedAirline +
-                                                    " Airlines?</center></html>");
-                                            fourthText.setFont(new Font("Courier", Font.BOLD, 24));
-                                            panel1.add(fourthText);
-
-                                            JButton noIWantADifferentFlightButton = new JButton("No, I want a" +
-                                                    " different flight.");
-                                            JButton yesIWantThisFlightButton = new JButton("Yes, I want this" +
-                                                    " flight.");
-                                            panel3.add(exitButton);
-                                            panel3.add(noIWantADifferentFlightButton);
-                                            panel3.add(yesIWantThisFlightButton);
-
-                                            frame.setVisible(true);
-
-                                            yesIWantThisFlightButton.addActionListener(new ActionListener() {
-                                                @Override
-                                                public void actionPerformed(ActionEvent e) {
-                                                    frame.setVisible(false);
-                                                    panel1.removeAll();
-                                                    panel3.removeAll();
-
-                                                    //fifth frame
-                                                    frame.setLayout(new BoxLayout(frame.getContentPane(),
-                                                            BoxLayout.Y_AXIS));
-
-                                                    JPanel panel4 = new JPanel();
-                                                    JPanel panel5 = new JPanel();
-
-                                                    JLabel fifthText = new JLabel("Please input your" +
-                                                            " information below.");
-                                                    fifthText.setFont(new Font("Courier", Font.BOLD, 24));
-                                                    panel1.add(fifthText);
-
-                                                    JLabel firstNameText = new JLabel("What is your first name?");
-                                                    panel2.add(firstNameText);
-                                                    JTextField firstNameTextField = new JTextField(10);
-                                                    panel2.add(firstNameTextField);
-
-
-                                                    JLabel lastNameText = new JLabel("What is your last name?");
-                                                    panel3.add(lastNameText);
-                                                    JTextField lastNameTextField = new JTextField(10);
-                                                    panel3.add(lastNameTextField);
-
-
-                                                    JLabel ageText = new JLabel("What is your age?");
-                                                    panel4.add(ageText);
-                                                    JTextField ageTextField = new JTextField(10);
-                                                    panel4.add(ageTextField);
-
-                                                    JButton nextButton = new JButton("Next");
-                                                    panel5.add(exitButton);
-                                                    panel5.add(nextButton);
-
-                                                    frame.add(panel4);
-                                                    frame.add(panel5);
-                                                    frame.setVisible(true);
-
-                                                    nextButton.addActionListener(new ActionListener() {
-                                                        @Override
-                                                        public void actionPerformed(ActionEvent e) {
-                                                            String firstName  = firstNameTextField.getText();
-                                                            String lastName = lastNameTextField.getText();
-                                                            String age = ageTextField.getText();
-                                                            //sixth frame
-                                                            String confirmMessage = "Are all the details you" +
-                                                                    " entered correct?" + "\n" +
-                                                                    "The passenger's name is " + firstName + " " +
-                                                                    lastName + " and their age is " +
-                                                                    age + "." + "\n" +
-                                                                    "If all the information shown is correct, select" +
-                                                                    " the Yes" + "\n" +
-                                                                    "button below, otherwise, select the No button.";
-                                                            int confirm = JOptionPane.showConfirmDialog
-                                                                    (null, confirmMessage,
-                                                                            "Confirm Info",
-                                                                            JOptionPane.YES_NO_OPTION);
-
-                                                            if (confirm == JOptionPane.YES_OPTION) {
-                                                                frame.setVisible(false);
-                                                                panel1.removeAll();
-                                                                panel2.removeAll();
-                                                                panel3.removeAll();
-                                                                panel4.removeAll();
-                                                                panel5.removeAll();
-                                                                frame.remove(panel5);
-
-                                                                Passenger passenger = new Passenger();
-                                                                passenger.setAge(Integer.valueOf(age));
-                                                                passenger.setFirstName(firstName.toUpperCase());
-                                                                passenger.setLastName(lastName.toUpperCase());
-                                                                //seventh frame
-                                                                BoardingPass boardingPass = null;
-                                                                String selectedGate = "";
-
-                                                                if (selectedAirline.equals("Delta")) {
-                                                                    selectedGate = Delta.getDeltaGateString();
-                                                                    boardingPass = new BoardingPass(passenger,
-                                                                            "Delta");
-                                                                    boardingPass.setGate(selectedGate);
-                                                                    Delta.addPassenger(passenger);
-                                                                } else if (selectedAirline.equals("Southwest")) {
-                                                                    selectedGate = Southwest.getSouthwestGateToString();
-                                                                    boardingPass = new BoardingPass(passenger,
-                                                                            "Southwest");
-                                                                    boardingPass.setGate(selectedGate);
-                                                                    Southwest.addPassenger(passenger);
-                                                                } else if (selectedAirline.equals("Alaska")) {
-                                                                    selectedGate = Alaska.getAlaskaGateToString();
-                                                                    boardingPass = new BoardingPass(passenger,
-                                                                            "Alaska");
-                                                                    boardingPass.setGate(selectedGate);
-                                                                    Alaska.addPassenger(passenger);
-                                                                }
-                                                                JLabel seventhText = new JLabel("<html><center>" +
-                                                                        "Flight data displaying for " +
-                                                                        selectedAirline + " Airlines." +
-                                                                        "<br>" + "Enjoy your flight!" + "<br>" +
-                                                                        "Flight is now boarding at Gate "
-                                                                        + selectedGate + "</center></html>");
-                                                                seventhText.setFont(new Font("Courier",
-                                                                        Font.BOLD, 24));
-                                                                panel1.add(seventhText);
-
-                                                                JScrollPane scrollPane1 = new JScrollPane(panel2);
-                                                                //somehow get the arraylist in the scroll pane??
-                                                                //somehow get number of passengers (on scrollpane???)
-
-                                                                JLabel printBP = new JLabel(boardingPass.
-                                                                        writeBoardingPass());
-                                                                panel3.add(printBP);
-
-                                                                JButton refreshFlightStatusButton = new JButton
-                                                                        ("Refresh Flight Status");
-                                                                panel4.add(exitButton);
-                                                                panel4.add(refreshFlightStatusButton);
-
-                                                                frame.setVisible(true);
-                                                            } else if (confirm == JOptionPane.NO_OPTION) {
-
-                                                                //back to fifth frame
-                                                                frame.requestFocus();
-                                                            }
-                                                        }
-                                                    }); // next button
-                                                }
-                                            }); // yes i want this flight button
-
-                                            noIWantADifferentFlightButton.addActionListener(new ActionListener() {
-                                                @Override
-                                                public void actionPerformed(ActionEvent e) {
-
-                                                    //back to third frame
-                                                    //requestFocus???
-                                                }
-                                            }); // no i want a different flight button
-                                        }
-                                    }); //choose this flight button
-                                }
-                            }); // yes i want to book a flight button
-                        }
-                    }); //book a flight button
+                    
                 }
             }); //EDT
         } catch (IOException e) {
@@ -390,55 +108,333 @@ public final class ReservationClient {
         }
     } //main
 
-//    private static void firstFrame(JFrame frame) {
-//        //first frame
-//        JPanel panel1 = new JPanel();
-//        JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
-//                " Airline Reservation" + "<br>" + "Management System!</center></html>");
-//        openingText.setFont(new Font("Courier", Font.BOLD, 24));
-//        panel1.add(openingText, BorderLayout.CENTER);
-//
-//        JPanel panel2 = new JPanel();
-//        JLabel imageLabel = new JLabel();
-//        ImageIcon purdueImage = new ImageIcon(new ImageIcon("logo.jpg").getImage().
-//                getScaledInstance(442, 540, Image.SCALE_DEFAULT));
-//        imageLabel.setIcon(purdueImage);
-//        panel2.add(imageLabel);
-//
-//        JPanel panel3 = new JPanel();
-//        JButton exitButton = new JButton("Exit");
-//        panel3.add(exitButton);
-//        JButton bookAFlightButton = new JButton("Book a Flight");
-//        panel3.add(bookAFlightButton);
-//        frame.add(panel1, BorderLayout.NORTH);
-//        frame.add(panel2, BorderLayout.CENTER);
-//        frame.add(panel3, BorderLayout.SOUTH);
-//        frame.setVisible(true);
-//
-//        exitButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                //eighth frame
-//                JOptionPane.showMessageDialog(null, "Thank you for using the " +
-//                                "Purdue University Airline Management System!", "Thank You!",
-//                        JOptionPane.PLAIN_MESSAGE);
-//                frame.dispose();
-//            }
-//        }); //exit button
-//
-//        bookAFlightButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                secondFrame
-//            }
-//    });
-//
-//    public static void secondFrame(JFrame frame) {
-//
-//    }
+    private static void firstFrame(JFrame frame) {
+        //first frame
+        JPanel panel1 = new JPanel();
+        JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
+                " Airline Reservation" + "<br>" + "Management System!</center></html>");
+        openingText.setFont(new Font("Courier", Font.BOLD, 24));
+        panel1.add(openingText, BorderLayout.CENTER);
 
-    private static void setKeyBindings(Container comp, int keyCode, String id, ActionListener actionListener) {
+        JPanel panel2 = new JPanel();
+        JLabel imageLabel = new JLabel();
+        ImageIcon purdueImage = new ImageIcon(new ImageIcon("logo.jpg").getImage().
+                getScaledInstance(442, 540, Image.SCALE_DEFAULT));
+        imageLabel.setIcon(purdueImage);
+        panel2.add(imageLabel);
+
+        JPanel panel3 = new JPanel();
+        JButton exitButton = new JButton("Exit");
+        panel3.add(exitButton);
+        JButton bookAFlightButton = new JButton("Book a Flight");
+        panel3.add(bookAFlightButton);
+        frame.add(panel1, BorderLayout.NORTH);
+        frame.add(panel2, BorderLayout.CENTER);
+        frame.add(panel3, BorderLayout.SOUTH);
+        frame.setVisible(true);
+    }   
+
+    private static void secondFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton) {
+        frame.setVisible(false);
+        panel1.removeAll();
+        panel2.removeAll();
+        panel3.removeAll();
+
+        //second frame
+        JLabel secondText = new JLabel("Do you want to book a flight today?");
+        secondText.setFont(new Font("Courier", Font.BOLD, 24));
+        panel1.add(secondText);
+
+        JButton yesIWantToBookAFlightButton = new JButton("Yes, I want to book a flight.");
+        panel3.add(exitButton);
+        panel3.add(yesIWantToBookAFlightButton);
+
+        frame.setVisible(true);
+    }
+    
+    private static void thirdFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+        JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton) {
+    
+        frame.setVisible(false);
+        panel1.removeAll();
+        panel2.removeAll();
+        panel3.removeAll();
+
+        //third frame
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+
+        JLabel thirdText = new JLabel("Choose a flight from the drop down menu.");
+        thirdText.setFont(new Font("Courier", Font.BOLD, 24));
+        panel1.add(thirdText);
+
+        airlineNames = new JComboBox<>();
+        airlineNames.addItem("Delta");
+        airlineNames.addItem("Southwest");
+        airlineNames.addItem("Alaska");
+        panel1.add(airlineNames);
+
+        JLabel message = new JLabel();
+        message.setText(Delta.getAirlineMessage());
+        panel2.add(message);
+
+        KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
+        int backslashKeyCode = KeyEvent.VK_BACK_SLASH;
+        setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
+        openNewWindow);
+
+        chooseThisFlightButton = new JButton("Choose this flight");
+        panel3.add(exitButton);
+        panel3.add(chooseThisFlightButton);
+
+        frame.setVisible(true);
+    }
+    
+    private static void fourthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+                                    JComboBox<String> airlineNames, JButton exitButton, 
+                                    JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton) {
+        frame.setVisible(false);
+        panel1.removeAll();
+        panel2.removeAll();
+        panel3.removeAll();
+
+        //fourth frame
+        frame.setLayout(new BorderLayout());
+        String selectedAirline = (String) airlineNames.getSelectedItem();
+        JLabel fourthText = new JLabel("<html><center>Are you sure that" +
+        " you want to book a flight on " + "<br>" + selectedAirline +
+        " Airlines?</center></html>");
+        fourthText.setFont(new Font("Courier", Font.BOLD, 24));
+        panel1.add(fourthText);
+
+        noIWantADifferentFlightButton = new JButton("No, I want a" +
+        " different flight.");
+        yesIWantThisFlightButton = new JButton("Yes, I want this" +
+        " flight.");
+        panel3.add(exitButton);
+        panel3.add(noIWantADifferentFlightButton);
+        panel3.add(yesIWantThisFlightButton);
+
+        frame.setVisible(true);
+    }
+    
+    private static void fifthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton) {
+        frame.setVisible(false);
+        panel1.removeAll();
+        panel3.removeAll();
+
+        //fifth frame
+        frame.setLayout(new BoxLayout(frame.getContentPane(),
+        BoxLayout.Y_AXIS));
+
+        JPanel panel4 = new JPanel();
+        JPanel panel5 = new JPanel();
+
+        JLabel fifthText = new JLabel("Please input your" +
+        " information below.");
+        fifthText.setFont(new Font("Courier", Font.BOLD, 24));
+        panel1.add(fifthText);
+
+        JLabel firstNameText = new JLabel("What is your first name?");
+        panel2.add(firstNameText);
+        JTextField firstNameTextField = new JTextField(10);
+        panel2.add(firstNameTextField);
+
+
+        JLabel lastNameText = new JLabel("What is your last name?");
+        panel3.add(lastNameText);
+        JTextField lastNameTextField = new JTextField(10);
+        panel3.add(lastNameTextField);
+
+
+        JLabel ageText = new JLabel("What is your age?");
+        panel4.add(ageText);
+        JTextField ageTextField = new JTextField(10);
+        panel4.add(ageTextField);
+
+        JButton nextButton = new JButton("Next");
+        panel5.add(exitButton);
+        panel5.add(nextButton);
+
+        frame.add(panel4);
+        frame.add(panel5);
+        frame.setVisible(true);
+    }
+    
+    private static void sixthFrame(JFrame frame, JTextField firstNameTextField, JTextField lastNameTextField,
+                                   JTextField ageTextField, JPanel panel1, JPanel panel2, JPanel panel3,
+                                   JPanel panel4, JPanel panel5, JComboBox<String> airlineNames, 
+                                   String selectedAirline, JButton exitButton) {
+        String firstName  = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+        String age = ageTextField.getText();
+        //sixth frame
+        String confirmMessage = "Are all the details you" +
+        " entered correct?" + "\n" +
+        "The passenger's name is " + firstName + " " +
+        lastName + " and their age is " +
+        age + "." + "\n" +
+        "If all the information shown is correct, select" +
+        " the Yes" + "\n" +
+        "button below, otherwise, select the No button.";
+        int confirm = JOptionPane.showConfirmDialog
+        (null, confirmMessage,
+        "Confirm Info",
+        JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) { // yes button
+        frame.setVisible(false);
+        panel1.removeAll();
+        panel2.removeAll();
+        panel3.removeAll();
+        panel4.removeAll();
+        panel5.removeAll();
+        frame.remove(panel5);
+
+        Passenger passenger = new Passenger();
+        passenger.setAge(Integer.valueOf(age));
+        passenger.setFirstName(firstName);
+        passenger.setLastName(lastName);
+        //seventh frame
+        BoardingPass boardingPass = null;
+        String selectedGate = "";
+
+        if (selectedAirline.equals("Delta")) {
+        selectedGate = Delta.getDeltaGateString();
+        boardingPass = new BoardingPass(passenger,
+        "Delta");
+        boardingPass.setGate(selectedGate);
+        } else if (selectedAirline.equals("Southwest")) {
+        selectedGate = Southwest.getSouthwestGateToString();
+        boardingPass = new BoardingPass(passenger,
+        "Southwest");
+        boardingPass.setGate(selectedGate);
+        } else if (selectedAirline.equals("Alaska")) {
+        selectedGate = Alaska.getAlaskaGateToString();
+        boardingPass = new BoardingPass(passenger,
+        "Alaska");
+        boardingPass.setGate(selectedGate);
+        }
+        JLabel seventhText = new JLabel("<html><center>" +
+        "Flight data displaying for " +
+        selectedAirline + " Airlines." +
+        "<br>" + "Enjoy your flight!" + "<br>" +
+        "Flight is now boarding at Gate "
+        + selectedGate + "</center></html>");
+        seventhText.setFont(new Font("Courier",
+        Font.BOLD, 24));
+        panel1.add(seventhText);
+
+        JScrollPane scrollPane1 = new JScrollPane();
+        //somehow get the arraylist in the scroll pane??
+        //somehow get number of passengers (on scrollpane???)
+
+        JLabel printBP = new JLabel(boardingPass.
+        writeBoardingPass());
+        panel3.add(printBP);
+        JButton refreshFlightStatusButton = new JButton
+        ("Refresh Flight Status");
+        panel4.add(exitButton);
+        panel4.add(refreshFlightStatusButton);
+
+        frame.setVisible(true);
+        } else if (confirm == JOptionPane.NO_OPTION) {
+        //back to fifth frame
+        frame.requestFocus();
+        } // no button
+    }
+    
+    private static void seventhFrame(JFrame frame) {
+        //eighth frame
+        JOptionPane.showMessageDialog(null, "Thank you for using the " +
+                        "Purdue University Airline Management System!", "Thank You!",
+                JOptionPane.PLAIN_MESSAGE);
+        frame.dispose();
+    }
+    
+    private static void actionListenersMethod(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+                                              JPanel panel4, JPanel panel5, JComboBox airlineNames, JButton exitButton,
+                                              JButton bookAFlightButton, JButton yesIWantToBookAFlightButton,
+                                              JButton chooseThisFlightButton, JLabel message,
+                                              JButton yesIWantThisFlightButton, JButton noIWantADifferentFlightButton, 
+                                              JButton nextButton, JTextField firstNameTextField, JTextField 
+                                              lasNameTextField, JTextField ageTextField, String selectedAirline) {
+
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seventhFrame(frame);
+            }
+        }); //exit button
+
+        bookAFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondFrame(frame, panel1, panel2, panel3, exitButton);
+            }
+        });
+
+        yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton);
+            }
+        });
+
+        airlineNames.addItemListener(listener -> {
+        String choice;
+        JComboBox getSelection = (JComboBox) listener.getSource();
+        choice = (String) getSelection.getSelectedItem();
+        if (choice.equals("Delta")) {
+        message.setText(Delta.getAirlineMessage());
+        panel2.add(message);
+        } else if (choice.equals("Southwest")) {
+        message.setText(Southwest.getAirlineMessage());
+        panel2.add(message);
+        } else if (choice.equals("Alaska")) {
+        message.setText(Alaska.getAirlineMessage());
+        panel2.add(message);
+        }
+        });
+
+        chooseThisFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fourthFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, noIWantADifferentFlightButton,
+                        yesIWantThisFlightButton);
+            }    
+        });
+        
+
+        yesIWantThisFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fifthFrame(frame, panel1, panel2, panel3, exitButton);
+            }    
+        });
+
+        noIWantADifferentFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fourthFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, noIWantADifferentFlightButton,
+                        yesIWantThisFlightButton);
+            }    
+        });
+
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sixthFrame(frame, firstNameTextField, lasNameTextField, ageTextField, panel1, panel2, panel3, panel4,
+                        panel5, airlineNames, selectedAirline, exitButton);
+            }            
+        });
+        
+    }
+    
+    private static void runGUI() {
+
+    }
+
+    public static void setKeyBindings(Container comp, int keyCode, String id, ActionListener actionListener) {
         JPanel jp = (JPanel) comp;
         InputMap inMap = jp.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap aMap = jp.getActionMap();
@@ -453,7 +449,7 @@ public final class ReservationClient {
         aMap.put(id, abstractAction);
     }
 
-    private static void resetKeyBindings(KeyStroke ks, Container comp) {
+    public static void resetKeyBindings(KeyStroke ks, Container comp) {
         JPanel cp = ((JPanel) comp);
         ActionMap aMap = cp.getActionMap();
         InputMap inMap = cp.getInputMap();
@@ -486,36 +482,10 @@ public final class ReservationClient {
     };
 }
 
-class ResponseListener implements ActionListener {
+class ResponseListener {
 
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
-
-//how to store whether a button was pressed or not??
-
-//make frame pop up on center of screen
-//for first frame how to center text???
-//figure out how to make background all white
-//how to make sure jframe is always the same size each time??
-
-//why is new Runnable gray??
-
 //what is the responselistener class for??
-
-//how to store whether a button was pressed or not??
-
-//make frame pop up on center of screen
-//for first frame how to center text???
-//figure out how to make background all white
-//how to make sure jframe is always the same size each time??
-
-//why is new Runnable gray??
-
-//what is the responselistener class for??
-
-
 
 //drop down box possibly move to another panel???
 
