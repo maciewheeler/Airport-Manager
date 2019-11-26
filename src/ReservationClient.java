@@ -100,7 +100,30 @@ public final class ReservationClient {
                     frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     frame.setResizable(true);
                     frame.setLocationRelativeTo(null);
-                    
+
+                    JPanel panel1 = new JPanel();
+                    JPanel panel2 = new JPanel();
+                    JPanel panel3 = new JPanel();
+                    JPanel panel4 = new JPanel();
+                    JPanel panel5 = new JPanel();
+                    JComboBox<String> airlineNames = new JComboBox<>();
+                    JButton exitButton = new JButton();
+                    JButton bookAFlightButton = new JButton();
+                    JButton yesIWantToBookAFlightButton = new JButton();
+                    JButton chooseThisFlightButton = new JButton();
+                    JLabel message = new JLabel();
+                    JButton yesIWantThisFlightButton = new JButton();
+                    JButton noIWantADifferentFlightButton = new JButton();
+                    JButton nextButton = new JButton();
+                    JTextField firstNameTextField = new JTextField();
+                    JTextField lastNameTextField = new JTextField();
+                    JTextField ageTextField = new JTextField();
+                    String selectedAirline = "";
+
+                    runGUI(frame, panel1, panel2, panel3, panel4, panel5, airlineNames, exitButton, bookAFlightButton,
+                            yesIWantToBookAFlightButton, chooseThisFlightButton, message, yesIWantThisFlightButton,
+                            noIWantADifferentFlightButton, nextButton, firstNameTextField, lastNameTextField,
+                            ageTextField, selectedAirline);
                 }
             }); //EDT
         } catch (IOException e) {
@@ -108,7 +131,8 @@ public final class ReservationClient {
         }
     } //main
 
-    private static void firstFrame(JFrame frame) {
+    private static void firstFrame(JFrame frame, JComboBox<String> airlineNames, JButton chooseThisFlightButton,
+                                   JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton) {
         //first frame
         JPanel panel1 = new JPanel();
         JLabel openingText = new JLabel("<html><center>Welcome to the Purdue University" +
@@ -132,9 +156,26 @@ public final class ReservationClient {
         frame.add(panel2, BorderLayout.CENTER);
         frame.add(panel3, BorderLayout.SOUTH);
         frame.setVisible(true);
-    }   
 
-    private static void secondFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton) {
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seventhFrame(frame);
+            }
+        }); //exit button
+
+        bookAFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondFrame(frame, panel1, panel2, panel3, exitButton, airlineNames, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
+            }
+        });
+    }
+
+    private static void secondFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
+                                    JComboBox<String> airlineNames, JButton chooseThisFlightButton,
+                                    JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton) {
         frame.setVisible(false);
         panel1.removeAll();
         panel2.removeAll();
@@ -150,11 +191,20 @@ public final class ReservationClient {
         panel3.add(yesIWantToBookAFlightButton);
 
         frame.setVisible(true);
+
+        yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
+            }
+        });
     }
-    
+
     private static void thirdFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
-        JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton) {
-    
+        JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton,
+                                   JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton) {
+
         frame.setVisible(false);
         panel1.removeAll();
         panel2.removeAll();
@@ -187,10 +237,36 @@ public final class ReservationClient {
         panel3.add(chooseThisFlightButton);
 
         frame.setVisible(true);
+
+        airlineNames.addItemListener(listener -> {
+            String choice;
+            JComboBox getSelection = (JComboBox) listener.getSource();
+            choice = (String) getSelection.getSelectedItem();
+            if (choice.equals("Delta")) {
+                message.setText(Delta.getAirlineMessage());
+                panel2.add(message);
+            } else if (choice.equals("Southwest")) {
+                message.setText(Southwest.getAirlineMessage());
+                panel2.add(message);
+            } else if (choice.equals("Alaska")) {
+                message.setText(Alaska.getAirlineMessage());
+                panel2.add(message);
+            }
+        });
+
+        JComboBox<String> finalAirlineNames = airlineNames;
+        JButton finalChooseThisFlightButton = chooseThisFlightButton;
+        chooseThisFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fourthFrame(frame, panel1, panel2, panel3, finalAirlineNames, exitButton, finalChooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
+            }
+        });
     }
-    
+
     private static void fourthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
-                                    JComboBox<String> airlineNames, JButton exitButton, 
+                                    JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton,
                                     JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton) {
         frame.setVisible(false);
         panel1.removeAll();
@@ -215,9 +291,27 @@ public final class ReservationClient {
         panel3.add(yesIWantThisFlightButton);
 
         frame.setVisible(true);
+
+        yesIWantThisFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fifthFrame(frame, panel1, panel2, panel3, exitButton, selectedAirline);
+            }
+        });
+
+        JButton finalNoIWantADifferentFlightButton = noIWantADifferentFlightButton;
+        JButton finalYesIWantThisFlightButton = yesIWantThisFlightButton;
+        noIWantADifferentFlightButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton,
+                        finalNoIWantADifferentFlightButton, finalYesIWantThisFlightButton);
+            }
+        });
     }
-    
-    private static void fifthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton) {
+
+    private static void fifthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
+                                   String selectedAirline) {
         frame.setVisible(false);
         panel1.removeAll();
         panel3.removeAll();
@@ -258,11 +352,19 @@ public final class ReservationClient {
         frame.add(panel4);
         frame.add(panel5);
         frame.setVisible(true);
+
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sixthFrame(frame, firstNameTextField, lastNameTextField, ageTextField, panel1, panel2, panel3, panel4,
+                        panel5, selectedAirline, exitButton);
+            }
+        });
     }
-    
+
     private static void sixthFrame(JFrame frame, JTextField firstNameTextField, JTextField lastNameTextField,
                                    JTextField ageTextField, JPanel panel1, JPanel panel2, JPanel panel3,
-                                   JPanel panel4, JPanel panel5, JComboBox<String> airlineNames, 
+                                   JPanel panel4, JPanel panel5,
                                    String selectedAirline, JButton exitButton) {
         String firstName  = firstNameTextField.getText();
         String lastName = lastNameTextField.getText();
@@ -291,7 +393,7 @@ public final class ReservationClient {
         frame.remove(panel5);
 
         Passenger passenger = new Passenger();
-        passenger.setAge(Integer.valueOf(age));
+        passenger.setAge(Integer.parseInt(age));
         passenger.setFirstName(firstName);
         passenger.setLastName(lastName);
         //seventh frame
@@ -314,6 +416,7 @@ public final class ReservationClient {
         "Alaska");
         boardingPass.setGate(selectedGate);
         }
+
         JLabel seventhText = new JLabel("<html><center>" +
         "Flight data displaying for " +
         selectedAirline + " Airlines." +
@@ -342,7 +445,7 @@ public final class ReservationClient {
         frame.requestFocus();
         } // no button
     }
-    
+
     private static void seventhFrame(JFrame frame) {
         //eighth frame
         JOptionPane.showMessageDialog(null, "Thank you for using the " +
@@ -350,14 +453,14 @@ public final class ReservationClient {
                 JOptionPane.PLAIN_MESSAGE);
         frame.dispose();
     }
-    
+
     private static void actionListenersMethod(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
                                               JPanel panel4, JPanel panel5, JComboBox airlineNames, JButton exitButton,
                                               JButton bookAFlightButton, JButton yesIWantToBookAFlightButton,
                                               JButton chooseThisFlightButton, JLabel message,
-                                              JButton yesIWantThisFlightButton, JButton noIWantADifferentFlightButton, 
-                                              JButton nextButton, JTextField firstNameTextField, JTextField 
-                                              lasNameTextField, JTextField ageTextField, String selectedAirline) {
+                                              JButton yesIWantThisFlightButton, JButton noIWantADifferentFlightButton,
+                                              JButton nextButton, JTextField firstNameTextField, JTextField
+                                              lastNameTextField, JTextField ageTextField, String selectedAirline) {
 
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -369,14 +472,16 @@ public final class ReservationClient {
         bookAFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                secondFrame(frame, panel1, panel2, panel3, exitButton);
+                secondFrame(frame, panel1, panel2, panel3, exitButton, airlineNames, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
             }
         });
 
         yesIWantToBookAFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton);
+                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
             }
         });
 
@@ -399,39 +504,49 @@ public final class ReservationClient {
         chooseThisFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fourthFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, noIWantADifferentFlightButton,
-                        yesIWantThisFlightButton);
-            }    
+                fourthFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
+            }
         });
-        
+
 
         yesIWantThisFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fifthFrame(frame, panel1, panel2, panel3, exitButton);
-            }    
+                fifthFrame(frame, panel1, panel2, panel3, exitButton, selectedAirline);
+            }
         });
 
         noIWantADifferentFlightButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fourthFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, noIWantADifferentFlightButton,
-                        yesIWantThisFlightButton);
-            }    
+                thirdFrame(frame, panel1, panel2, panel3, airlineNames, exitButton, chooseThisFlightButton,
+                        noIWantADifferentFlightButton, yesIWantThisFlightButton);
+            }
         });
 
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sixthFrame(frame, firstNameTextField, lasNameTextField, ageTextField, panel1, panel2, panel3, panel4,
-                        panel5, airlineNames, selectedAirline, exitButton);
-            }            
+                sixthFrame(frame, firstNameTextField, lastNameTextField, ageTextField, panel1, panel2, panel3, panel4,
+                        panel5, selectedAirline, exitButton);
+            }
         });
-        
     }
-    
-    private static void runGUI() {
 
+    private static void runGUI(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+                               JPanel panel4, JPanel panel5, JComboBox airlineNames, JButton exitButton,
+                               JButton bookAFlightButton, JButton yesIWantToBookAFlightButton,
+                               JButton chooseThisFlightButton, JLabel message,
+                               JButton yesIWantThisFlightButton, JButton noIWantADifferentFlightButton,
+                               JButton nextButton, JTextField firstNameTextField, JTextField
+                                       lastNameTextField, JTextField ageTextField, String selectedAirline) {
+        firstFrame(frame, airlineNames, chooseThisFlightButton, noIWantADifferentFlightButton,
+                yesIWantThisFlightButton);
+        actionListenersMethod(frame, panel1, panel2, panel3, panel4, panel5, airlineNames, exitButton
+                ,bookAFlightButton, yesIWantToBookAFlightButton, chooseThisFlightButton, message,
+                yesIWantThisFlightButton, noIWantADifferentFlightButton, nextButton, firstNameTextField,
+                lastNameTextField, ageTextField, selectedAirline);
     }
 
     public static void setKeyBindings(Container comp, int keyCode, String id, ActionListener actionListener) {
