@@ -593,6 +593,13 @@ public final class ReservationClient {
 
             littleFrame.add(panel3);
             littleFrame.setVisible(true);
+
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    littleFrame.dispose();
+                }
+            });
         }
     };
 }
