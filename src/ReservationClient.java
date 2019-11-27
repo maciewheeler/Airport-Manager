@@ -609,10 +609,4 @@ class ResponseListener {
 }
 //what is the responselistener class for??
 
-//drop down box possibly move to another panel???
-
-//KeyEvent.VK_Backslash
-//comp = frame.getContentPane();
-//id is openNewWindow
-
 //resetKeyBindings(backslash, frame.getContentPane());
