@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -14,14 +15,17 @@ import java.util.Objects;
  */
 
 public final class ReservationServer {
-    private Delta delta = new Delta();
-    private Southwest southwest = new Southwest();
-    private Alaska alaska = new Alaska();
-    private Gate gate = new Gate();
-    private Passenger passenger = new Passenger();
-    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, "Delta");
-    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, "Alaska");
-    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, "Southwest");
+//    private Delta delta = new Delta();
+//    private Southwest southwest = new Southwest();
+//    private Alaska alaska = new Alaska();
+//    private Gate gate = new Gate();
+//    private Passenger passenger = new Passenger();
+//    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, "Delta");
+//    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, "Alaska");
+//    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, "Southwest");
+    ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
+    ArrayList<Passenger> deltaPassengers = new ArrayList<>();
+    ArrayList<Passenger> southwestPassengers = new ArrayList<>();
 
     /**
      * The server socket of this server.
@@ -45,7 +49,7 @@ public final class ReservationServer {
         Socket clientSocket;
         ClientHandler handler;
         Thread handlerThread;
-        int clientCount = 0;
+        int clientCount = 1;
 
         System.out.printf("<Now serving clients on port %d...>%n", this.serverSocket.getLocalPort());
 
@@ -72,11 +76,10 @@ public final class ReservationServer {
 
     public void updateFile() throws FileNotFoundException, IOException {
         try {
-            File f = new File("reservations.txt");
-            FileReader fr = new FileReader(f);
-            FileWriter fw = new FileWriter(f);
-            BufferedReader bfr = new BufferedReader(fr);
-            BufferedWriter bfw = new BufferedWriter(fw);
+            ArrayList<Passenger> passengers = new ArrayList<>();
+            FileReader fr = new FileReader("reservations.txt");
+            FileWriter fw = new FileWriter("reservations.txt", true);
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -261,7 +264,7 @@ class ClientHandler implements Runnable {
 }
 
 //add the reservations.txt
-
+//server reads in reservations.txt and returns it to the client, client updates the text in the gui with the new passenger
 //printwriter and printreader
 
 
@@ -272,3 +275,5 @@ class ClientHandler implements Runnable {
 //edit run method
 
 //putting run method in server?? main method???
+
+//swingworker???/
