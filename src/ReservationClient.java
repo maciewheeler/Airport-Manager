@@ -227,10 +227,9 @@ public final class ReservationClient {
         message.setText(Delta.getAirlineMessage());
         panel2.add(message);
 
-        KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
         int backslashKeyCode = KeyEvent.VK_BACK_SLASH;
         setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
-        openNewWindow);
+                openDeltaWindow);
 
         chooseThisFlightButton = new JButton("Choose this flight");
         panel3.add(exitButton);
@@ -245,12 +244,21 @@ public final class ReservationClient {
             if (choice.equals("Delta")) {
                 message.setText(Delta.getAirlineMessage());
                 panel2.add(message);
+
+                setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
+                        openDeltaWindow);
             } else if (choice.equals("Southwest")) {
                 message.setText(Southwest.getAirlineMessage());
                 panel2.add(message);
+
+                setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
+                        openSouthwestWindow);
             } else if (choice.equals("Alaska")) {
                 message.setText(Alaska.getAirlineMessage());
                 panel2.add(message);
+
+                setKeyBindings(frame.getContentPane(), backslashKeyCode, "openNewWindow",
+                        openAlaskaWindow);
             }
         });
 
@@ -572,7 +580,7 @@ public final class ReservationClient {
         aMap.put(ks, null);
     }
 
-    public static Action openNewWindow = new AbstractAction() {
+    public static Action openDeltaWindow = new AbstractAction() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             JFrame littleFrame = new JFrame();
@@ -598,6 +606,74 @@ public final class ReservationClient {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     littleFrame.dispose();
+                    KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
+                    resetKeyBindings(backslash, littleFrame.getContentPane());
+                }
+            });
+        }
+    };
+
+    public static Action openSouthwestWindow = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFrame littleFrame = new JFrame();
+            littleFrame.setSize(100, 100);
+            littleFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            littleFrame.setResizable(true);
+
+            JPanel panel1 = new JPanel();
+            JPanel panel2 = new JPanel();
+            JPanel panel3 = new JPanel();
+
+            JLabel airlineName = new JLabel();
+
+            JScrollPane sp = new JScrollPane();
+
+            JButton exitButton = new JButton("Exit");
+            panel3.add(exitButton);
+
+            littleFrame.add(panel3);
+            littleFrame.setVisible(true);
+
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    littleFrame.dispose();
+                    KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
+                    resetKeyBindings(backslash, littleFrame.getContentPane());
+                }
+            });
+        }
+    };
+
+    public static Action openAlaskaWindow = new AbstractAction() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            JFrame littleFrame = new JFrame();
+            littleFrame.setSize(100, 100);
+            littleFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            littleFrame.setResizable(true);
+
+            JPanel panel1 = new JPanel();
+            JPanel panel2 = new JPanel();
+            JPanel panel3 = new JPanel();
+
+            JLabel airlineName = new JLabel();
+
+            JScrollPane sp = new JScrollPane();
+
+            JButton exitButton = new JButton("Exit");
+            panel3.add(exitButton);
+
+            littleFrame.add(panel3);
+            littleFrame.setVisible(true);
+
+            exitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    littleFrame.dispose();
+                    KeyStroke backslash = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SLASH, 0, true);
+                    resetKeyBindings(backslash, littleFrame.getContentPane());
                 }
             });
         }
@@ -607,6 +683,7 @@ public final class ReservationClient {
 class ResponseListener {
 
 }
-//what is the responselistener class for??
+
+//
 
 //resetKeyBindings(backslash, frame.getContentPane());
