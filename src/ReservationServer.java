@@ -74,20 +74,6 @@ public final class ReservationServer {
         }
     } //serveClients
 
-    public void updateFile() throws FileNotFoundException, IOException {
-        try {
-            ArrayList<Passenger> passengers = new ArrayList<>();
-            FileReader fr = new FileReader("reservations.txt");
-            FileWriter fw = new FileWriter("reservations.txt", true);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     /**
      * Returns the hash code of this server.
      *
@@ -140,7 +126,6 @@ public final class ReservationServer {
      */
     public static void main(String[] args) {
         ReservationServer server;
-
         try {
             server = new ReservationServer();
         } catch (IOException e) {
@@ -149,7 +134,7 @@ public final class ReservationServer {
             return;
         }
 
-        server.serveClients();
+//        server.serveClients();
     } //main
 }
 
@@ -169,6 +154,34 @@ class ClientHandler implements Runnable {
         Objects.requireNonNull(clientSocket, "the specified client socket is null");
 
         this.clientSocket = clientSocket;
+    }
+
+    public void updateFile() throws FileNotFoundException, IOException {
+        try {
+            ArrayList<String> passengers = new ArrayList<>();
+            FileReader fr = new FileReader("reservations.txt");
+            BufferedReader bfr = new BufferedReader(fr);
+            FileWriter fw = new FileWriter("reservations.txt", true);
+            BufferedWriter bfw = new BufferedWriter(fw);
+
+            String line;
+            while (true) {
+                line = bfr.readLine();
+                if (line != null) {
+                    passengers.add(line);
+                } else {
+                    break;
+                }
+            }
+
+            
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -267,7 +280,6 @@ class ClientHandler implements Runnable {
 //server reads in reservations.txt and returns it to the client, client updates the text in the gui with the new passenger
 //printwriter and printreader
 
-
 //reservationserver
 //edit serveClients
 
@@ -277,3 +289,15 @@ class ClientHandler implements Runnable {
 //putting run method in server?? main method???
 
 //swingworker???/
+
+//Every time a client connects - they should be put on their own thread.
+//Each time that a GUI action is made, it should be made on the EDT.
+//Every time that the client requests for specific information, it will send a word or phrase, representative of what
+// it wants. For example, PASS can be sent to the server to indicate that the server needs to send back the passenger
+// list. COU could be sent for passenger count, and CAP could be sent for passenger capacity. You'll have to think
+// about all the different keywords you'll have to implement for this project. But, sending these requests, which
+// are called queries, should each be made on its own thread, and sent to the server, and wait until they receive data
+// back from the server before changing any variables or anything in the client-side.
+
+//only send strings and passenger objects to the server, but can send ints/chars/etc. as strings and parse them on the server side
+
