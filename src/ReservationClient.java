@@ -241,6 +241,7 @@ public final class ReservationClient {
             String choice;
             JComboBox getSelection = (JComboBox) listener.getSource();
             choice = (String) getSelection.getSelectedItem();
+            assert choice != null;
             if (choice.equals("Delta")) {
                 message.setText(Delta.getAirlineMessage());
                 panel2.add(message);
@@ -439,8 +440,8 @@ public final class ReservationClient {
         //somehow get the arraylist in the scroll pane??
         //somehow get number of passengers (on scrollpane???)
 
-        JLabel printBP = new JLabel(boardingPass.
-        writeBoardingPass());
+            assert boardingPass != null;
+            JLabel printBP = new JLabel(boardingPass.writeBoardingPass());
         panel3.add(printBP);
         JButton refreshFlightStatusButton = new JButton
         ("Refresh Flight Status");
@@ -497,7 +498,8 @@ public final class ReservationClient {
         String choice;
         JComboBox getSelection = (JComboBox) listener.getSource();
         choice = (String) getSelection.getSelectedItem();
-        if (choice.equals("Delta")) {
+            assert choice != null;
+            if (choice.equals("Delta")) {
         message.setText(Delta.getAirlineMessage());
         panel2.add(message);
         } else if (choice.equals("Southwest")) {
@@ -684,6 +686,26 @@ class ResponseListener {
 
 }
 
-//
+//The ResponseListener should contain code where it handles receiving information back from the server. The idea of
+// the project with the server/client connections should be as follows:
+//The GUI is running, and requests for specific information from the reservations.txt file. Since it does not have this
+// file on its side, it needs to make a query request to the server, and receive the information that it needs from the
+// server instead of the file itself.
+//It will send a keyword to the server, from ReservationClient.java, which will then be picked up by ClientHandler.
+// ClientHandler should have a set of different methods, where it can query the text file as necessary for the specific
+// data that has to be sent back to the server. It will get the appropriate data (based on the keyword sent to the
+// server), and then send that back to the client. When the client receives it, that keyword along with the data will
+// be picked up the ResponseListener, which will then set variables as necessary in ReservationClient, based on the
+// data sent by the server.
 
-//resetKeyBindings(backslash, frame.getContentPane());
+//responselistener should be reading input sent back by the server and assign specific variables to values
+// in reservationclient such that the gui will update
+//should write data back to the clients and send data back via some form of object (server return data in string format?)
+
+//if the flight becomes full while the client is being served have a message pop up that the flight is no longer available
+//and then send them back to the dropdown screen
+
+//server/client sending and receiving passenger objects, serialize and deserialize passenger object over network stream
+
+//client prints something, server reads it
+
