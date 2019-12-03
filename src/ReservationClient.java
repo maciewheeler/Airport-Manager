@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * A client used to connect to a ReservationServer instance.
@@ -125,18 +124,17 @@ public final class ReservationClient {
                             bookAFlightButton, yesIWantToBookAFlightButton, chooseThisFlightButton, message,
                             yesIWantThisFlightButton, noIWantADifferentFlightButton, nextButton, firstNameTextField,
                             lastNameTextField, ageTextField, selectedAirline, passenger);
-//                    try {
-//                        String passengerString = passenger.getFirstName().substring(0, 1).toUpperCase() + ". " +
-//                                passenger.getLastName().toUpperCase() + ", " + passenger.getAge() + "\n-------------" +
-//                                "--------" + selectedAirline.toUpperCase();
-//                        oos.writeObject(passengerString);
-//                        oos.flush();
-//                    } catch (IOException e) {
-//                        e.getStackTrace();
-//                    }
+                    try {
+                        String passengerString = passenger.getFirstName().substring(0, 1).toUpperCase() + ". " +
+                                passenger.getLastName().toUpperCase() + ", " + passenger.getAge() + "\n-------------" +
+                                "--------" + selectedAirline.toUpperCase();
+                        assert false;
+                        socketWriter.write(passengerString);
+                        socketWriter.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
             }); //EDT
         } catch (IOException e) {
             e.printStackTrace();
