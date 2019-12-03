@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Alaska implements Airline {
 
     private static ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
-    private final static Gate alaskaGate = new Gate();
+    private final static Gate ALASKA_GATE = new Gate();
     private static String nameOfAirline = "Alaska Airlines";
 
     public static void addPassenger(Passenger passenger) {
@@ -25,15 +25,15 @@ public class Alaska implements Airline {
     }
 
     public int getMaxPassenger() {
-        return passengerMax;
+        return PASSENGER_MAX;
     }
 
     public int getFlightNumber() {
-        return flightNumber;
+        return FLIGHT_NUMBER;
     }
 
     public int getAvailableSeats() {
-        return passengerMax - alaskaPassengers.size();
+        return PASSENGER_MAX - alaskaPassengers.size();
     }
 
     public static String getNameOfAirline() {
@@ -41,10 +41,10 @@ public class Alaska implements Airline {
     }
 
     public final static String getAlaskaGateToString() {
-        return alaskaGate.getGate();
+        return ALASKA_GATE.getGate();
     }
     public final static Gate getAlaskaGate() {
-        return alaskaGate;
+        return ALASKA_GATE;
     }
 
     public static String getAirlineMessage() {
