@@ -9,8 +9,8 @@ import java.io.Serializable;
 
 public interface Airline extends Serializable {
 
-    int passengerMax = 100;
-    int flightNumber = 18000;
+    int PASSENGER_MAX = 100;
+    int FLIGHT_NUMBER = 18000;
 
     int getCurrentPassengerCount();
 
@@ -21,9 +21,3 @@ public interface Airline extends Serializable {
     int getAvailableSeats();
 
 }
-
-//if the button had to go back a frame
-//scroll pane
-//refresh flight status
-//back slash
-//server client
