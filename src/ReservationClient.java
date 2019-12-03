@@ -41,6 +41,8 @@ public final class ReservationClient {
         String portString;
         int port;
         Socket socket;
+        BufferedWriter socketWriter = null;
+        BufferedReader socketReader = null;
 
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
@@ -87,8 +89,7 @@ public final class ReservationClient {
 
         try {
             socket = new Socket(hostname, port);
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            ResponseListener responseListener = new ResponseListener(socket);
 
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -120,29 +121,47 @@ public final class ReservationClient {
                     String selectedAirline = "";
                     Passenger passenger = new Passenger();
 
-                    runGUI(frame, panel1, panel2, panel3, panel4, panel5, airlineNames, exitButton, bookAFlightButton,
-                            yesIWantToBookAFlightButton, chooseThisFlightButton, message, yesIWantThisFlightButton,
-                            noIWantADifferentFlightButton, nextButton, firstNameTextField, lastNameTextField,
-                            ageTextField, selectedAirline, passenger);
-                    try {
-                        String passengerString = passenger.getFirstName().substring(0, 1).toUpperCase() + ". " +
-                                passenger.getLastName().toUpperCase() + ", " + passenger.getAge() + "\n-------------" +
-                                "--------" + selectedAirline.toUpperCase();
-                        oos.writeObject(passengerString);
-                        oos.flush();
-                    } catch (IOException e) {
-                        e.getStackTrace();
-                    }
+                    ResponseListener.runGUI(frame, panel1, panel2, panel3, panel4, panel5, airlineNames, exitButton,
+                            bookAFlightButton, yesIWantToBookAFlightButton, chooseThisFlightButton, message,
+                            yesIWantThisFlightButton, noIWantADifferentFlightButton, nextButton, firstNameTextField,
+                            lastNameTextField, ageTextField, selectedAirline, passenger);
+//                    try {
+//                        String passengerString = passenger.getFirstName().substring(0, 1).toUpperCase() + ". " +
+//                                passenger.getLastName().toUpperCase() + ", " + passenger.getAge() + "\n-------------" +
+//                                "--------" + selectedAirline.toUpperCase();
+//                        oos.writeObject(passengerString);
+//                        oos.flush();
+//                    } catch (IOException e) {
+//                        e.getStackTrace();
+//                    }
                 }
-                
-                
+
+
             }); //EDT
         } catch (IOException e) {
             e.printStackTrace();
         }
     } //main
+}
 
-    private static void firstFrame(JFrame frame, JComboBox<String> airlineNames, JButton chooseThisFlightButton,
+class ResponseListener {
+
+    private static Socket socket;
+    private static BufferedWriter socketWriter = null;
+    private static BufferedReader socketReader = null;
+
+    public ResponseListener(Socket socket) {
+        ResponseListener.socket = socket;
+
+        try {
+            socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+            socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
+    }
+
+    public static void firstFrame(JFrame frame, JComboBox<String> airlineNames, JButton chooseThisFlightButton,
                                    JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton,
                                    Passenger passenger) {
         //first frame
@@ -185,10 +204,10 @@ public final class ReservationClient {
         });
     }
 
-    private static void secondFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
+    public static void secondFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
                                     JComboBox<String> airlineNames, JButton chooseThisFlightButton,
                                     JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton, Passenger
-                                    passenger) {
+                                            passenger) {
         frame.setVisible(false);
         panel1.removeAll();
         panel2.removeAll();
@@ -214,7 +233,7 @@ public final class ReservationClient {
         });
     }
 
-    private static void thirdFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+    public static void thirdFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
                                    JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton,
                                    JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton,
                                    Passenger passenger) {
@@ -288,7 +307,7 @@ public final class ReservationClient {
         });
     }
 
-    private static void fourthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+    public static void fourthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
                                     JComboBox<String> airlineNames, JButton exitButton, JButton chooseThisFlightButton,
                                     JButton noIWantADifferentFlightButton, JButton yesIWantThisFlightButton,
                                     Passenger passenger) {
@@ -334,7 +353,7 @@ public final class ReservationClient {
         });
     }
 
-    private static void fifthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
+    public static void fifthFrame(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3, JButton exitButton,
                                    String selectedAirline, Passenger passenger) {
         frame.setVisible(false);
         panel1.removeAll();
@@ -386,7 +405,7 @@ public final class ReservationClient {
         });
     }
 
-    private static void sixthFrame(JFrame frame, JTextField firstNameTextField, JTextField lastNameTextField,
+    public static void sixthFrame(JFrame frame, JTextField firstNameTextField, JTextField lastNameTextField,
                                    JTextField ageTextField, JPanel panel1, JPanel panel2, JPanel panel3,
                                    JPanel panel4, JPanel panel5,
                                    String selectedAirline, JButton exitButton, Passenger passenger) {
@@ -469,7 +488,7 @@ public final class ReservationClient {
         } // no button
     }
 
-    private static void seventhFrame(JFrame frame) {
+    public static void seventhFrame(JFrame frame) {
         //eighth frame
         JOptionPane.showMessageDialog(null, "Thank you for using the " +
                         "Purdue University Airline Management System!", "Thank You!",
@@ -477,7 +496,7 @@ public final class ReservationClient {
         frame.dispose();
     }
 
-    private static void actionListenersMethod(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+    public static void actionListenersMethod(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
                                               JPanel panel4, JPanel panel5, JComboBox airlineNames, JButton exitButton,
                                               JButton bookAFlightButton, JButton yesIWantToBookAFlightButton,
                                               JButton chooseThisFlightButton, JLabel message,
@@ -559,7 +578,7 @@ public final class ReservationClient {
         });
     }
 
-    private static void runGUI(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
+    public static void runGUI(JFrame frame, JPanel panel1, JPanel panel2, JPanel panel3,
                                JPanel panel4, JPanel panel5, JComboBox airlineNames, JButton exitButton,
                                JButton bookAFlightButton, JButton yesIWantToBookAFlightButton,
                                JButton chooseThisFlightButton, JLabel message,
@@ -711,23 +730,14 @@ public final class ReservationClient {
             });
         }
     };
-}
 
-class ResponseListener {
-    
-
-    public void run(ObjectOutputStream oos, ObjectInputStream ois) {
-        try {
-            ArrayList<String> newPassengerArrayList = new ArrayList<>();
-            Object object = ois.readObject();
-            newPassengerArrayList = (ArrayList<String>) object;
-            oos.writeObject(newPassengerArrayList);
-        } catch (IOException e) {
-            e.getStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void run(BufferedWriter socketWriter, BufferedReader bufferedReader) {
+//        try {
+//            socketReader.readLine();
+//        } catch (IOException e) {
+//            e.getStackTrace();
+//        }
+//    }
 }
 
 //The ResponseListener should contain code where it handles receiving information back from the server. The idea of
