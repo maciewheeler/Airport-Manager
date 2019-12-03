@@ -151,8 +151,8 @@ class ClientHandler implements Runnable {
     public void run() {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
 
             ArrayList<String> passengers = new ArrayList<>();
             FileReader fr = new FileReader("reservations.txt");
@@ -168,10 +168,10 @@ class ClientHandler implements Runnable {
                 }
             }
 
-            for (int i = 0; i < passengers.size(); i++) {
-                bufferedWriter.write(passengers.get(i));
-                bufferedWriter.flush();
-            }
+//            for (int i = 0; i < passengers.size(); i++) {
+//                oos.writeObject(passengers.get(i));
+//                oos.flush();
+//            }
 
             ArrayList<String> alaskaPassengers = new ArrayList<>();
             ArrayList<String> deltaPassengers = new ArrayList<>();
@@ -199,7 +199,7 @@ class ClientHandler implements Runnable {
                 southwestPassengers.add(passengers.get(i));
             }
 
-            String passenger = bufferedReader.readLine();
+            String passenger = ois.readObject().toString();
             if (passenger.contains("DELTA")) {
                 deltaPassengers.add(passenger);
             } else if (passenger.contains("SOUTHWEST")) {
@@ -239,13 +239,15 @@ class ClientHandler implements Runnable {
             bfr.close();
 
             for (int i = 0; i < passengers.size(); i++) {
-                bufferedWriter.write(passengers.get(i));
-                bufferedWriter.flush();
+                oos.writeObject(passengers.get(i));
+                oos.flush();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.getStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     } //run
 
