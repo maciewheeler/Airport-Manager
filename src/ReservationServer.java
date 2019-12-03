@@ -15,17 +15,6 @@ import java.util.Objects;
  */
 
 public final class ReservationServer {
-//    private Delta delta = new Delta();
-//    private Southwest southwest = new Southwest();
-//    private Alaska alaska = new Alaska();
-//    private Gate gate = new Gate();
-//    private Passenger passenger = new Passenger();
-//    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, "Delta");
-//    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, "Alaska");
-//    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, "Southwest");
-    ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
-    ArrayList<Passenger> deltaPassengers = new ArrayList<>();
-    ArrayList<Passenger> southwestPassengers = new ArrayList<>();
 
     /**
      * The server socket of this server.
@@ -128,13 +117,13 @@ public final class ReservationServer {
         ReservationServer server;
         try {
             server = new ReservationServer();
+            server.serveClients();
         } catch (IOException e) {
             e.printStackTrace();
 
             return;
         }
 
-//        server.serveClients();
     } //main
 }
 
@@ -156,13 +145,18 @@ class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
     }
 
-    public void updateFile() throws FileNotFoundException, IOException {
+    /**
+     * Handles the requests sent by the client connected to this request handler's client socket.
+     */
+    public void run() {
+
         try {
+            ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
+
             ArrayList<String> passengers = new ArrayList<>();
             FileReader fr = new FileReader("reservations.txt");
             BufferedReader bfr = new BufferedReader(fr);
-            FileWriter fw = new FileWriter("reservations.txt", true);
-            BufferedWriter bfw = new BufferedWriter(fw);
 
             String line;
             while (true) {
@@ -174,59 +168,87 @@ class ClientHandler implements Runnable {
                 }
             }
 
-            
+//            for (int i = 0; i < passengers.size(); i++) {
+//                oos.writeObject(passengers.get(i));
+//                oos.flush();
+//            }
 
+            ArrayList<String> alaskaPassengers = new ArrayList<>();
+            ArrayList<String> deltaPassengers = new ArrayList<>();
+            ArrayList<String> southwestPassengers = new ArrayList<>();
+            int deltaIndex = 0;
+            int southwestIndex = 0;
+
+            for (int i = 0; i < passengers.size(); i++) {
+                if (passengers.get(i).equals("DELTA")) {
+                    deltaIndex = i;
+                } else if (passengers.get(i).equals("SOUTHWEST")) {
+                    southwestIndex = i;
+                }
+            }
+
+            for (int i = 0; i < deltaIndex; i++) {
+                alaskaPassengers.add(passengers.get(i));
+            }
+
+            for (int i = deltaIndex; i < southwestIndex; i++) {
+                deltaPassengers.add(passengers.get(i));
+            }
+
+            for (int i = southwestIndex; i < passengers.size(); i++) {
+                southwestPassengers.add(passengers.get(i));
+            }
+
+            String passenger = ois.readObject().toString();
+            if (passenger.contains("DELTA")) {
+                deltaPassengers.add(passenger);
+            } else if (passenger.contains("SOUTHWEST")) {
+                southwestPassengers.add(passenger);
+            } else if (passenger.contains("ALASKA")) {
+                alaskaPassengers.add(passenger);
+            }
+
+            PrintWriter pw = new PrintWriter("reservations.txt");
+            pw.print("");
+            pw.close();
+
+            FileWriter fw = new FileWriter("reservations.txt");
+            for (int i = 0; i < alaskaPassengers.size(); i++) {
+                fw.write(alaskaPassengers.get(i));
+            }
+
+            for (int i = 0; i < deltaPassengers.size(); i++) {
+                fw.write(deltaPassengers.get(i));
+            }
+
+            for (int i = 0; i < southwestPassengers.size(); i++) {
+                fw.write(southwestPassengers.get(i));
+            }
+            fw.close();
+            passengers.clear();
+
+            String newLine;
+            while (true) {
+                newLine = bfr.readLine();
+                if (newLine != null) {
+                    passengers.add(newLine);
+                } else {
+                    break;
+                }
+            }
+            bfr.close();
+
+            for (int i = 0; i < passengers.size(); i++) {
+                oos.writeObject(passengers.get(i));
+                oos.flush();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.getStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-    }
-
-    /**
-     * Handles the requests sent by the client connected to this request handler's client socket.
-     */
-    public void run() {
-        BufferedReader reader = null;
-        BufferedWriter writer = null;
-        String line;
-
-        try {
-            reader = new BufferedReader(new InputStreamReader(this.clientSocket.getInputStream()));
-
-            writer = new BufferedWriter(new OutputStreamWriter(this.clientSocket.getOutputStream()));
-
-            line = reader.readLine();
-
-            while (line != null) {
-                writer.write(line);
-
-                writer.newLine();
-
-                writer.flush();
-
-                line = reader.readLine();
-            } //end while
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } //end try catch
-            } //end if
-
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } //end try catch
-            } //end if
-        } //end try catch finally
     } //run
 
     /**
@@ -301,3 +323,19 @@ class ClientHandler implements Runnable {
 
 //only send strings and passenger objects to the server, but can send ints/chars/etc. as strings and parse them on the server side
 
+//private Delta delta = new Delta();
+//    private Southwest southwest = new Southwest();
+//    private Alaska alaska = new Alaska();
+//    private Gate gate = new Gate();
+//    private Passenger passenger = new Passenger();
+//    private BoardingPass deltaBoardingPass = new BoardingPass(passenger, "Delta");
+//    private BoardingPass alaskaBoardingPass = new BoardingPass(passenger, "Alaska");
+//    private BoardingPass southwestBoardingPass = new BoardingPass(passenger, "Southwest");
+//    ArrayList<Passenger> alaskaPassengers = new ArrayList<>();
+//    ArrayList<Passenger> deltaPassengers = new ArrayList<>();
+//    ArrayList<Passenger> southwestPassengers = new ArrayList<>();
+
+
+//all read and writing here???
+
+//make sure to update counter in the reservations.txt file
