@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Southwest implements Airline {
 
     private static ArrayList<Passenger> southwestPassengers = new ArrayList<>();
-    private final static Gate southwestGate = new Gate();
+    private final static Gate SOUTHWEST_GATE = new Gate();
     private static String nameOfAirline = "Southwest Airlines";
 
     public static void addPassenger(Passenger passenger) {
@@ -25,15 +25,15 @@ public class Southwest implements Airline {
     }
 
     public int getMaxPassenger() {
-        return passengerMax;
+        return PASSENGER_MAX;
     }
 
     public int getFlightNumber() {
-        return flightNumber;
+        return FLIGHT_NUMBER;
     }
 
     public int getAvailableSeats() {
-        return passengerMax - southwestPassengers.size();
+        return PASSENGER_MAX - southwestPassengers.size();
     }
 
     public static String getNameOfAirline() {
@@ -41,10 +41,10 @@ public class Southwest implements Airline {
     }
 
     public final static String getSouthwestGateToString() {
-        return southwestGate.getGate();
+        return SOUTHWEST_GATE.getGate();
     }
     public final static Gate getSouthwestGate() {
-        return southwestGate;
+        return SOUTHWEST_GATE;
     }
 
     public static String getAirlineMessage() {
